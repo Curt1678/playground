@@ -50,7 +50,15 @@ input#radiusInput {border: 1px solid #cdcdcd;}
 <style id="colorChangeKeyframe"></style>
 
 <style id="backgroundColor">
-	.container {animation: colorCycle 20s infinite;}
+	.container {
+		animation-name: colorCycle;
+		animation-iteration-count: infinite;
+	}
+</style>
+<style id="seizureControl">
+	.container {
+		animation-duration: 20s;
+	}
 </style>
 <style id="textColor">
 	.container:not(input){color: #000;}
@@ -479,9 +487,18 @@ function changeRadius(){
 function backgroundReturn(){
 	let tag = document.querySelector('style#backgroundColor');
 	
-	tag.innerHTML = ".container {animation: colorCycle 20s infinite;}";
+	tag.innerHTML = ".container {animation-name: colorCycle; animation-iteration-count: infinite;}";
 
 	document.querySelector('button[onclick="backgroundReturn()"]').style.display = "none";
+}
+
+function seizureControl(){
+	let input = document.querySelector('input#seizureControl').value;
+	let period = (20000-input)/1000;
+	
+	let tag = document.querySelector('style#seizureControl');
+	
+	tag.innerHTML = ".container {animation-duration:" + period + "s}";
 }
 
 
@@ -501,6 +518,8 @@ function backgroundReturn(){
 <!-- background color -->
 
 <p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/> &nbsp; <button onclick="backgroundReturn()">Return to Cycle</button></p>
+
+<p>Seizure Control: <input id="seizureControl" onchange="seizureControl()" type="range" value="0" min="0" max="19900" step="100"/></p>
 
 <p>Colour of text: <input id="TCTag" type="color" value="#000000" onchange="changeText()" oninput="changeText()" /></p>
 
