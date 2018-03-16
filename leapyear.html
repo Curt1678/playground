@@ -1,6 +1,13 @@
 <head>
 
+<link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+
 <style>
+
+.container {margin:5% 10%; padding: 20px; border: 1px solid #cdcdcd; font-family: 'Mina', sans-serif;}
+
+h1 {text-align: center;}
+
 td {width:30px;height:30px;border:1px solid black;}
 
 .arrayInput {width:50px;}
@@ -30,18 +37,35 @@ td {width:30px;height:30px;border:1px solid black;}
 div#xmasTree {text-align:center; width: 500px; line-height: 10%;}
 
 #fizzBuzzUpTo {width: 346px}
+
+#xmasHeight {width: 34px;}
+</style>
+
+<style id="backgroundColor">
+	.container {background-color: #bbffdd;}
+</style>
+<style id="textColor">
+	.container:not(input){color: #000;}
 </style>
 <script>
 function calculate(val){
 	if (val !== ''){
 		if (Number.isInteger(parseInt(val))){
-			if (Number.isInteger(parseInt(val)/4) && Number.isInteger(parseInt(val)/100) == false){return "Leap Year!"} else {return "Not a leap year!"}
+			if (parseInt(val)%4 == 0){
+				if (parseInt(val)%400 == 0){
+					return "Leap Year!";
+				}
+				if (parseInt(val)%100 == 0){
+					return "Not a Leap Year!";
+				}
+				return "Leap Year!";
+			}
 		} else {return "Not a year!"}
 	} else {return "Please input a year."}	
 }
 
 function fill(){
-document.querySelector('#output').innerHTML = calculate(document.querySelector('#input').value);}
+document.querySelector('#output').value = calculate(document.querySelector('#input').value);}
 
 function multiply(){
 	document.querySelector('#result').value = parseInt(document.querySelector('#one').value) * parseInt(document.querySelector('#two').value);
@@ -405,20 +429,53 @@ function buildXmasTree(){
 	tree.innerHTML += "<p>*</p><p>*****</p>";
 }
 
+function changeBackground(){
+	let BGcolorTag = document.querySelector('style#backgroundColor');
+	
+	let color = document.querySelector('input#BGCTag').value;
+	
+	BGcolorTag.innerHTML = ".container {background-color: " + color + ";}";
+}
+
+function changeText(){
+	let TcolorTag = document.querySelector('style#textColor');
+	
+	let color = document.querySelector('input#TCTag').value;
+	
+	TcolorTag.innerHTML = ".container:not(input) {color: " + color + ";}";
+}
+
 
 
 </script>
 </head>
 
 <body>
+<div class="container">
+
+<h1>Some Cool JS Functions</h1>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- background color -->
+
+<p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/></p>
+
+<p>Colour of text: <input id="TCTag" type="color" value="#000" onchange="changeText()" oninput="changeText()" /></p>
+
+<br /><br />
+<hr />
+<br /><br />
 
 <!-- leap years! -->
 
 <h3>Leap Years</h3>
 
-<input id="input" type="text" placeholder="Year" />&nbsp;<button onclick="fill()">Go</button>
+<input id="input" type="number" placeholder="Year" />&nbsp;<button onclick="fill()">Go</button>
 <br /><br />
-<p style="border: 1px solid #c0c0c0; width:150px; height:20px; text-align:center;" id="output"></p>
+<input type="text" id="output" />
 
 <br /><br />
 <hr />
@@ -545,12 +602,14 @@ function buildXmasTree(){
 
 <h3>Christmas Tree</h3>
 
-<p>How tall would you like your Christmas tree? <input type="number" id="xmasHeight" value="7" /> &nbsp; <button onclick="buildXmasTree()">Build</button></p>
+<p>How tall would you like your Christmas tree? <input type="number" id="xmasHeight" value="7" />units &nbsp; <button onclick="buildXmasTree()">Build</button></p>
 
 <div id="xmasTree"></div>
 
 <br /><br />
 <hr />
 <br /><br />
+
+</div>
 
 </body>
