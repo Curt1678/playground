@@ -4,7 +4,7 @@
 
 <style>
 
-.container {margin:5% 10%; padding: 20px; border: 1px solid #cdcdcd; font-family: 'Mina', sans-serif;}
+.container {margin:5% 10%; padding: 20px; border: 1px solid #cdcdcd; font-family: 'Mina', sans-serif; border-radius: 5px;}
 
 h1 {text-align: center;}
 
@@ -39,6 +39,8 @@ div#xmasTree {text-align:center; width: 500px; line-height: 10%;}
 #fizzBuzzUpTo {width: 346px}
 
 #xmasHeight {width: 34px;}
+
+input#radiusInput {border: 1px solid #cdcdcd;}
 </style>
 
 <style id="backgroundColor">
@@ -445,6 +447,12 @@ function changeText(){
 	TcolorTag.innerHTML = ".container:not(input) {color: " + color + ";}";
 }
 
+function changeRadius(){
+	let radiusInput = document.querySelector('input#radiusInput').value + "px";
+	
+	document.querySelector('.container').style.borderRadius = radiusInput;
+}
+
 
 
 </script>
@@ -463,7 +471,9 @@ function changeText(){
 
 <p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/></p>
 
-<p>Colour of text: <input id="TCTag" type="color" value="#000" onchange="changeText()" oninput="changeText()" /></p>
+<p>Colour of text: <input id="TCTag" type="color" value="#000000" onchange="changeText()" oninput="changeText()" /></p>
+
+<p>Border Radius: <input id="radiusInput" type="range" min="0" max="100" value="3" onchange="changeRadius()"oninput="changeRadius()" /></p>
 
 <br /><br />
 <hr />
@@ -607,7 +617,7 @@ function changeText(){
 <div id="xmasTree"></div>
 
 <br /><br />
-<hr />
+
 <br /><br />
 
 </div>
