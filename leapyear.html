@@ -4,6 +4,8 @@
 
 <style>
 
+button[onclick="backgroundReturn()"] {display: none;}
+
 .container {margin:5% 10%; padding: 20px; border: 1px solid #cdcdcd; font-family: 'Mina', sans-serif; border-radius: 5px;}
 
 h1 {text-align: center;}
@@ -41,15 +43,34 @@ div#xmasTree {text-align:center; width: 500px; line-height: 10%;}
 #xmasHeight {width: 34px;}
 
 input#radiusInput {border: 1px solid #cdcdcd;}
+
+
 </style>
 
+<style id="colorChangeKeyframe"></style>
+
 <style id="backgroundColor">
-	.container {background-color: #bbffdd;}
+	.container {animation: colorCycle 20s infinite;}
 </style>
 <style id="textColor">
 	.container:not(input){color: #000;}
 </style>
 <script>
+
+window.addEventListener('load',colorChangeKeyframe());
+
+function colorChangeKeyframe(){
+	let styleTag = document.querySelector('style#colorChangeKeyframe');
+
+	styleTag.innerHTML += "@keyframes colorCycle {";
+	
+	for(i=0; i<100.5; i+=0.5){
+		styleTag.innerHTML += i + "% {background-color:hsl(" + (i/100)*360 + ", 70%, 70%)}";
+	}
+	
+	styleTag.innerHTMl += "}";
+}
+
 function calculate(val){
 	if (val !== ''){
 		if (Number.isInteger(parseInt(val))){
@@ -437,6 +458,8 @@ function changeBackground(){
 	let color = document.querySelector('input#BGCTag').value;
 	
 	BGcolorTag.innerHTML = ".container {background-color: " + color + ";}";
+	
+	document.querySelector('button[onclick="backgroundReturn()"]').style.display="inline";
 }
 
 function changeText(){
@@ -451,6 +474,14 @@ function changeRadius(){
 	let radiusInput = document.querySelector('input#radiusInput').value + "px";
 	
 	document.querySelector('.container').style.borderRadius = radiusInput;
+}
+
+function backgroundReturn(){
+	let tag = document.querySelector('style#backgroundColor');
+	
+	tag.innerHTML = ".container {animation: colorCycle 20s infinite;}";
+
+	document.querySelector('button[onclick="backgroundReturn()"]').style.display = "none";
 }
 
 
@@ -469,7 +500,7 @@ function changeRadius(){
 
 <!-- background color -->
 
-<p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/></p>
+<p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/> &nbsp; <button onclick="backgroundReturn()">Return to Cycle</button></p>
 
 <p>Colour of text: <input id="TCTag" type="color" value="#000000" onchange="changeText()" oninput="changeText()" /></p>
 
