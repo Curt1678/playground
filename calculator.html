@@ -7,6 +7,7 @@ button {width:50px; height:50px;}
 button#equ {width:200px; height:50px;}
 .buttons p{margin: 0px;}
 .buttons p:nth-child(1) {margin: 16px 0 0 0;}
+.btn-active {background: #cdcdcd; color: #000;}
 
 #display {height:50px; width: 200px; text-align: right;}
 
@@ -15,7 +16,7 @@ button#equ {width:200px; height:50px;}
 </style>
 <script>
 
-
+let clear = false;
 
 function input(val){
 	switch(val){
@@ -29,6 +30,10 @@ function input(val){
 		case 8:
 		case 9:
 		case 0:
+			if(clear){
+				document.querySelector('input#display').value = "";
+				clear = false;
+			}
 			document.querySelector('input#display').value += val;
 			break;
 		case '.':
@@ -41,56 +46,82 @@ function input(val){
 			document.querySelector('p#equals').innerHTML = "";
 			document.querySelector('p#answer').innerHTML = "";
 			document.querySelector('input#display').value = "";
-			
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
 			break;
-		case 'x':
+		case '*':
 			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
-			document.querySelector('p#operator').innerHTML = 'x';
-			document.querySelector('input#display').value = "";
-			operator = 'x';
-			document.querySelector('input#display').value = "";			
+			document.querySelector('p#operator').innerHTML = '*';
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.add('btn-active');
+			clear = true;			
 			break;
 		case '/':
 			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
 			document.querySelector('p#operator').innerHTML = '/';
-			document.querySelector('input#display').value = "";
-			operator = '/';
-			document.querySelector('input#display').value = "";			
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.add('btn-active');
+			clear = true;
 			break;
 		case '+':
 			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
 			document.querySelector('p#operator').innerHTML = '+';
-			document.querySelector('input#display').value = "";
-			operator = '+';
-			document.querySelector('input#display').value = "";			
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
+			document.querySelector('button#plus').classList.add('btn-active');
+			clear = true;
 			break;
 		case '-':
 			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
 			document.querySelector('p#operator').innerHTML = '-';
-			document.querySelector('input#display').value = "";
-			operator = '+';
-			document.querySelector('input#display').value = "";			
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.add('btn-active');
+			clear = true;
 			break;
 		case '=':
 			document.querySelector('p#second').innerHTML = parseFloat(document.querySelector('input#display').value);
 			document.querySelector('p#equals').innerHTML = "=";
-			switch(document.querySelector('p#operator').innerHTML){
-				case '+':
-					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
-					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
-					break;
-				case '-':
-					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
-					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
-					break;
-				case 'x':
-					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
-					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
-					break;
-				case '/':
-					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
-					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
-					break;
+			clear = true;
+			document.querySelector('button#plus').classList.remove('btn-active');
+			document.querySelector('button#minu').classList.remove('btn-active');
+			document.querySelector('button#divi').classList.remove('btn-active');
+			document.querySelector('button#mult').classList.remove('btn-active');
+			
+			if (isNaN(parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML)) == false){
+				switch(document.querySelector('p#operator').innerHTML){
+					case '+':
+						document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
+						document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
+						break;
+					case '-':
+						document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
+						document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
+						break;
+					case '*':
+						document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
+						document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
+						break;
+					case '/':
+						document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
+						document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
+						break;
+				}
+			} else {
+				document.querySelector('input#display').value = 'ERROR';
+				document.querySelector('p#answer').innerHTML = 'ERROR';
 			}
 			break;
 			
@@ -98,6 +129,39 @@ function input(val){
 	}
 return;
 }
+
+window.addEventListener('keydown',function(e){
+	switch(parseInt(e.key)){
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 0:
+			input(parseInt(e.key));
+			break;
+		default:
+			switch(e.key){
+				case '+':
+				case '-':
+				case '/':
+				case '*':
+					input(e.key);
+					break;
+				case 'Enter':
+					input('=');
+					break;
+				case 'Backspace':
+					input('C');
+					break;
+			}
+	}
+	
+});
 
 
 </script>
@@ -107,13 +171,13 @@ return;
 
 <div id="calculator">
 
-<input id="display" type="text" />
+<input id="display" type="text" disabled />
 
 <div class="buttons">
-<p><button id="1" onclick="input(1)">1</button><button id="2" onclick="input(2)">2</button><button id="3" onclick="input(3)">3</button><button id="+" onclick="input('+')">+</button></p>
-<p><button id="4" onclick="input(4)">4</button><button id="5" onclick="input(5)">5</button><button id="6" onclick="input(6)">6</button><button id="-" onclick="input('-')">-</button></p>
-<p><button id="7" onclick="input(7)">7</button><button id="8" onclick="input(8)">8</button><button id="9" onclick="input(9)">9</button><button id="x" onclick="input('x')">x</button></p>
-<p><button id="C" onclick="input('C')">C</button><button id="0" onclick="input(0)">0</button><button id="." onclick="input('.')">.</button><button id="/" onclick="input('/')">/</button></p>
+<p><button id="1" onclick="input(1)">1</button><button id="2" onclick="input(2)">2</button><button id="3" onclick="input(3)">3</button><button id="plus" onclick="input('+')">+</button></p>
+<p><button id="4" onclick="input(4)">4</button><button id="5" onclick="input(5)">5</button><button id="6" onclick="input(6)">6</button><button id="minu" onclick="input('-')">-</button></p>
+<p><button id="7" onclick="input(7)">7</button><button id="8" onclick="input(8)">8</button><button id="9" onclick="input(9)">9</button><button id="mult" onclick="input('*')">x</button></p>
+<p><button id="C" onclick="input('C')">C</button><button id="0" onclick="input(0)">0</button><button id="." onclick="input('.')">.</button><button id="divi" onclick="input('/')">/</button></p>
 <p><button id="equ" onclick="input('=')">=</button></p>
 </div>
 
