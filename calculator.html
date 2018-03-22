@@ -1,0 +1,129 @@
+<!-- calculator -->
+<html>
+<head>
+<style>
+
+button {width:50px; height:50px;}
+button#equ {width:200px; height:50px;}
+.buttons p{margin: 0px;}
+.buttons p:nth-child(1) {margin: 16px 0 0 0;}
+
+#display {height:50px; width: 200px; text-align: right;}
+
+#calculator {text-align: center;}
+
+</style>
+<script>
+
+
+
+function input(val){
+	switch(val){
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 0:
+			document.querySelector('input#display').value += val;
+			break;
+		case '.':
+			document.querySelector('input#display').value += '.';
+			break;
+		case 'C':
+			document.querySelector('p#first').innerHTML = "";
+			document.querySelector('p#second').innerHTML = "";
+			document.querySelector('p#operator').innerHTML = "";
+			document.querySelector('p#equals').innerHTML = "";
+			document.querySelector('p#answer').innerHTML = "";
+			document.querySelector('input#display').value = "";
+			
+			break;
+		case 'x':
+			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
+			document.querySelector('p#operator').innerHTML = 'x';
+			document.querySelector('input#display').value = "";
+			operator = 'x';
+			document.querySelector('input#display').value = "";			
+			break;
+		case '/':
+			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
+			document.querySelector('p#operator').innerHTML = '/';
+			document.querySelector('input#display').value = "";
+			operator = '/';
+			document.querySelector('input#display').value = "";			
+			break;
+		case '+':
+			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
+			document.querySelector('p#operator').innerHTML = '+';
+			document.querySelector('input#display').value = "";
+			operator = '+';
+			document.querySelector('input#display').value = "";			
+			break;
+		case '-':
+			document.querySelector('p#first').innerHTML = parseFloat(document.querySelector('input#display').value);
+			document.querySelector('p#operator').innerHTML = '-';
+			document.querySelector('input#display').value = "";
+			operator = '+';
+			document.querySelector('input#display').value = "";			
+			break;
+		case '=':
+			document.querySelector('p#second').innerHTML = parseFloat(document.querySelector('input#display').value);
+			document.querySelector('p#equals').innerHTML = "=";
+			switch(document.querySelector('p#operator').innerHTML){
+				case '+':
+					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
+					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) + parseFloat(document.querySelector('p#second').innerHTML);
+					break;
+				case '-':
+					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
+					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) - parseFloat(document.querySelector('p#second').innerHTML);
+					break;
+				case 'x':
+					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
+					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) * parseFloat(document.querySelector('p#second').innerHTML);
+					break;
+				case '/':
+					document.querySelector('p#answer').innerHTML = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
+					document.querySelector('input#display').value = parseFloat(document.querySelector('p#first').innerHTML) / parseFloat(document.querySelector('p#second').innerHTML);
+					break;
+			}
+			break;
+			
+		
+	}
+return;
+}
+
+
+</script>
+</head>
+
+<body>
+
+<div id="calculator">
+
+<input id="display" type="text" />
+
+<div class="buttons">
+<p><button id="1" onclick="input(1)">1</button><button id="2" onclick="input(2)">2</button><button id="3" onclick="input(3)">3</button><button id="+" onclick="input('+')">+</button></p>
+<p><button id="4" onclick="input(4)">4</button><button id="5" onclick="input(5)">5</button><button id="6" onclick="input(6)">6</button><button id="-" onclick="input('-')">-</button></p>
+<p><button id="7" onclick="input(7)">7</button><button id="8" onclick="input(8)">8</button><button id="9" onclick="input(9)">9</button><button id="x" onclick="input('x')">x</button></p>
+<p><button id="C" onclick="input('C')">C</button><button id="0" onclick="input(0)">0</button><button id="." onclick="input('.')">.</button><button id="/" onclick="input('/')">/</button></p>
+<p><button id="equ" onclick="input('=')">=</button></p>
+</div>
+
+<p id="first"></p>
+<p id="operator"></p>
+<p id="second"></p>
+<p id="equals"></p>
+<p id="answer"></p>
+
+</div>
+
+</body>
+</html>
