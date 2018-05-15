@@ -4,6 +4,16 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 <style>
+body {
+	position: relative;
+}
+
+.image-wrapper {
+	position: absolute;
+	transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
 div#cookie {
 	border: 1px solid black;
 	border-radius: 50%;
@@ -46,6 +56,15 @@ ul#autosList {line-height: 150%; list-style: none;}
 
 ul#autosList li button.autoLabel {height: 3em; width: 12em; float:left;}
 ul#autosList li button.autoAmm {height: 3em; width: 3em; color: #000; font-weight: bold;}
+
+.cursorText {
+	user-select: none;
+}
+
+@keyframes cursorImageFade {
+	0% {transform: translateY(0%); opacity: 1;}
+	100% {transform: translateY(-150%); opacity: 0;}
+}
 	
 	
 </style>
@@ -65,29 +84,29 @@ let auto3Price = 200;
 let auto4Price = 1000;
 
 function update(){
-	let currentCookies = parseInt(document.querySelector('div#counter').innerHTML);
-	
 	document.querySelector('span#rateSpan').innerHTML = rate.toFixed(1);
 	
-	if(currentCookies >= auto1Price){
+	document.querySelector('div#counter').innerHTML = Math.floor(val);
+	
+	if(val >= auto1Price){
 		document.querySelector('button#auto1').disabled="";
 	} else {
 		document.querySelector('button#auto1').disabled="disabled";
 	}
 	
-	if(currentCookies >= auto2Price){
+	if(val >= auto2Price){
 		document.querySelector('button#auto2').disabled="";
 	} else {
 		document.querySelector('button#auto2').disabled="disabled";
 	}
 	
-	if(currentCookies >= auto3Price){
+	if(val >= auto3Price){
 		document.querySelector('button#auto3').disabled="";
 	} else {
 		document.querySelector('button#auto3').disabled="disabled";
 	}
 	
-	if(currentCookies >= auto4Price){
+	if(val >= auto4Price){
 		document.querySelector('button#auto4').disabled="";
 	} else {
 		document.querySelector('button#auto4').disabled="disabled";
@@ -167,9 +186,31 @@ window.onfocus = function(){
 		
 }
 
+
+
 window.onload= function(){
 
+	document.querySelector('div#cookie').addEventListener('click',function(e){
+	let newEle = document.createElement('div');
+	newEle.classList.add("image-wrapper");
+	let newP = document.createElement('p');
+	newP.classList.add("cursorText");
+	newP.innerHTML = "+1";
 	
+	newEle.style.animationName = "cursorImageFade";
+	newEle.style.animationDuration = "1s";
+	
+	setTimeout(function(){newEle.outerHTML="";},1000);
+	
+	document.querySelector('body').append(newEle);
+	newEle.append(newP);
+	
+	newEle.style.left = e.pageX + "px";
+	newEle.style.top = e.pageY + "px";
+	
+	
+	
+	});
 
 	update();
 
