@@ -1,0 +1,160 @@
+<html>
+
+<head>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+
+div#stage1 {
+	border: 1px solid #000;
+	width: 95%;
+	height: 200px;
+	margin-left:auto;
+	margin-right:auto;
+	top: 50%;
+	position: relative;
+	transform: translateY(-50%);
+	
+}
+
+div#char {
+	width:3px;
+	height:3px;
+	padding: 0.6em;
+	background-color: red;
+	border:1px solid red;
+	position: absolute;
+}
+
+div#wasd {
+	text-align: center;
+	width: 100%;
+	font-size: 100px;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+
+	
+
+</style>
+
+<style id="charVel">
+	transform: translate(0px,0px);
+</style>
+
+<script>
+
+
+
+let char = document.querySelector('div#char');
+
+let xDisp = 0;
+let yDisp = 0;
+
+let xVel = 0;
+let yVel = 0;
+
+let xAccel = 0;
+let yAccel = 0;
+
+let instant = 0;
+
+let forceArr = [0,0,0,0];
+
+function stop(){
+	time = 0;
+};
+
+window.addEventListener('keydown',function(e){
+	switch(e.key){
+		case 'w':
+			yAccel += -75;
+			if(yAccel < -75){yAccel = -75;}
+			forceArr[0]="w";
+			break;
+		case 'a':
+			xAccel += -75;
+			if(xAccel < -75){xAccel = -75;}
+			forceArr[1]="a";
+			break;
+		case 's':
+			yAccel += 75;
+			if(yAccel > 75){yAccel = 75;}
+			forceArr[2]="s";
+			break;
+		case 'd':
+			xAccel += 75;
+			if(xAccel > 75){xAccel = 75;}
+			forceArr[3]="d";
+			break;
+	}
+});
+
+window.addEventListener('keyup',function(e){
+	switch(e.key){
+		case 'w':
+			yAccel -= -75;
+			forceArr[0]=0;
+			break;
+		case 'a':
+			xAccel -= -75;
+			forceArr[1]=0;
+			break;
+		case 's':
+			yAccel -= 75;
+			forceArr[2]=0;
+			break;
+		case 'd':
+			xAccel -= 75;
+			forceArr[3]=0;
+			break;
+	}
+});
+
+setInterval(function(){
+	if(forceArr[0] == 0 && forceArr[1] == 0 && forceArr[2] == 0 && forceArr[3] == 0){
+		xAccel = -0.9 * xVel;
+		yAccel = -0.9 * yVel;
+	}
+
+	if(instant != 0){
+		let deltat = (Date.now() - instant)/1000;
+		xDisp += xVel * deltat;
+		yDisp += yVel * deltat;
+		
+		xVel += xAccel * deltat; if(xVel > 150){xVel = 150;}
+		yVel += yAccel * deltat; if(yVel > 150){yVel = 150;}
+		
+		if(xVel < 1 && xVel > -1 && forceArr[1] == 0 && forceArr[3] == 0){xVel = 0}
+		if(yVel < 1 && yVel > -1 && forceArr[0] == 0 && forceArr[2] == 0){yVel = 0}
+		
+		
+	}
+	
+	document.querySelector('div#char').style.left = xDisp + "px";
+	document.querySelector('div#char').style.top = yDisp + "px";
+	instant = Date.now();
+	console.log('working')
+},25);
+</script>
+
+</head>
+
+<body>
+
+<div id="stage1">
+
+<div id="wasd">WASD</div>
+
+<div id="char"></div>
+
+</div>
+
+</body>
+
+
+</html>
