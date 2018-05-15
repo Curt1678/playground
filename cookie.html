@@ -54,6 +54,9 @@ ul#autosList li button.autoAmm {height: 3em; width: 3em; color: #000; font-weigh
 
 let rate = 0;
 
+let timeLeft = 0;
+let leftDetect = 0;
+
 let val = 0;
 
 let auto1Price = 10;
@@ -104,7 +107,7 @@ function auto1(){
 		document.querySelector('span#auto1amount').innerHTML = amm;
 		val -= auto1Price;
 		document.querySelector('div#counter').innerHTML = Math.floor(val);
-		auto1Price = Math.floor(auto1Price * 1.1);
+		auto1Price = Math.floor(auto1Price * 1.35);
 		update();
 }
 function auto2(){
@@ -114,7 +117,7 @@ function auto2(){
 		document.querySelector('span#auto2amount').innerHTML = amm;
 		val -= auto2Price;
 		document.querySelector('div#counter').innerHTML = Math.floor(val);
-		auto2Price = Math.floor(auto2Price * 1.1);
+		auto2Price = Math.floor(auto2Price * 1.35);
 		update();
 }
 function auto3(){
@@ -124,27 +127,49 @@ function auto3(){
 		document.querySelector('span#auto3amount').innerHTML = amm;
 		val -= auto3Price;
 		document.querySelector('div#counter').innerHTML = Math.floor(val);
-		auto3Price = Math.floor(auto3Price * 1.1);
+		auto3Price = Math.floor(auto3Price * 1.35);
 		update();
 }
-function auto3(){
+function auto4(){
 		rate += 50;
 		let amm = parseInt(document.querySelector('span#auto4amount').innerHTML);
 		amm++;
 		document.querySelector('span#auto4amount').innerHTML = amm;
 		val -= auto4Price;
 		document.querySelector('div#counter').innerHTML = Math.floor(val);
-		auto4Price = Math.floor(auto4Price * 1.1);
+		auto4Price = Math.floor(auto4Price * 1.35);
 		update();
 }
 
 setInterval(function(){
 		val += rate/100;
 		document.querySelector('div#counter').innerHTML = Math.floor(val);
-		update();
-	}, 10);
+		update();		
+}, 10);
+
+window.onblur = function(){
+		setTimeout(function(){
+			if (document.hidden){
+			leftDetect = 1;
+			timeLeft = Date.now();
+			} else {leftDetect = 0;}
+		},10);		
+}
+	
+window.onfocus = function(){
+		if(leftDetect == 1){
+			leftDetect = 0;
+			timeAway = (Date.now() - timeLeft)/1000;
+			val += timeAway * rate;
+			document.querySelector('div#counter').innerHTML = Math.floor(val);
+			update();
+		} else {update();}
+		
+}
 
 window.onload= function(){
+
+	
 
 	update();
 
