@@ -116,9 +116,12 @@ window.addEventListener('keyup',function(e){
 });
 
 setInterval(function(){
-	if(forceArr[0] == 0 && forceArr[1] == 0 && forceArr[2] == 0 && forceArr[3] == 0){
-		xAccel = -0.48 * xVel;
-		yAccel = -0.48 * yVel;
+	if(forceArr[0] == 0 && forceArr[2] == 0){
+		yAccel = -0.48 * yVel; // friction!
+	}
+	
+	if(forceArr[1] == 0 && forceArr[3] == 0){
+		xAccel = -0.48 * xVel;	// friction!
 	}
 
 	if(instant != 0){
