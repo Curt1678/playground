@@ -7,35 +7,45 @@
 <style>
 
 div#stage1 {
-	border: 1px solid #000;
 	width: 95%;
 	height: 200px;
 	margin-left:auto;
 	margin-right:auto;
 	top: 50%;
 	position: relative;
-	transform: translateY(-50%);
-	
+	transform: translateY(-50%);	
 }
 
 div#char {
-	width:3px;
-	height:3px;
-	padding: 0.6em;
+	width:20px;
+	height:20px;
+	border-radius: 50%;
 	background-color: red;
 	border:1px solid red;
 	position: absolute;
 }
 
+div#bumper-1 {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 1px solid #000;
+	position: absolute;
+	
+}
+
 div#wasd {
 	text-align: center;
-	width: 100%;
+	width: auto;
 	font-size: 100px;
 	font-family: 'Roboto', sans-serif;
 	position: relative;
 	top: 50%;
-	transform: translateY(-50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
 	line-height: 90%;
+	border: 1px solid #c0c0c0;
+	display: inline-block;
 }
 
 div#wasd span {
@@ -44,13 +54,9 @@ div#wasd span {
 
 span#w, span#a, span#s, span#d {opacity: 0.2;}
 
-.wasdShow {opacity: 1 !important;}
+.wasd-show {opacity: 1 !important;}
 	
 
-</style>
-
-<style id="charVel">
-	transform: translate(0px,0px);
 </style>
 
 <script>
@@ -79,28 +85,32 @@ function stop(){
 window.addEventListener('keydown',function(e){
 	switch(e.key){
 		case 'w':
+		case 'ArrowUp':
 			yAccel += -75;
 			if(yAccel < -75){yAccel = -75;}
 			forceArr[0]="w";
-			document.querySelector('span#w').classList.add('wasdShow');
+			document.querySelector('span#w').classList.add('wasd-show');
 			break;
 		case 'a':
+		case 'ArrowLeft':
 			xAccel += -75;
 			if(xAccel < -75){xAccel = -75;}
 			forceArr[1]="a";
-			document.querySelector('span#a').classList.add('wasdShow');
+			document.querySelector('span#a').classList.add('wasd-show');
 			break;
 		case 's':
+		case 'ArrowDown':
 			yAccel += 75;
 			if(yAccel > 75){yAccel = 75;}
 			forceArr[2]="s";
-			document.querySelector('span#s').classList.add('wasdShow');
+			document.querySelector('span#s').classList.add('wasd-show');
 			break;
 		case 'd':
+		case 'ArrowRight':
 			xAccel += 75;
 			if(xAccel > 75){xAccel = 75;}
 			forceArr[3]="d";
-			document.querySelector('span#d').classList.add('wasdShow');
+			document.querySelector('span#d').classList.add('wasd-show');
 			break;
 	}
 });
@@ -108,29 +118,64 @@ window.addEventListener('keydown',function(e){
 window.addEventListener('keyup',function(e){
 	switch(e.key){
 		case 'w':
+		case 'ArrowUp':
 			yAccel -= -75;
 			forceArr[0]=0;
-			document.querySelector('span#w').classList.remove('wasdShow');
+			document.querySelector('span#w').classList.remove('wasd-show');
 			break;
 		case 'a':
+		case 'ArrowLeft':
 			xAccel -= -75;
 			forceArr[1]=0;
-			document.querySelector('span#a').classList.remove('wasdShow');
+			document.querySelector('span#a').classList.remove('wasd-show');
 			break;
 		case 's':
+		case 'ArrowDown':
 			yAccel -= 75;
 			forceArr[2]=0;
-			document.querySelector('span#s').classList.remove('wasdShow');
+			document.querySelector('span#s').classList.remove('wasd-show');
 			break;
 		case 'd':
+		case 'ArrowRight':
 			xAccel -= 75;
 			forceArr[3]=0;
-			document.querySelector('span#d').classList.remove('wasdShow');
+			document.querySelector('span#d').classList.remove('wasd-show');
 			break;
 	}
 });
 
+function checkCollision(){
+	let bumper1 = document.querySelector('div#bumper-1');
+	let player = document.querySelector('div#char');
+	
+	let b1XPos = parseFloat(bumper1.style.left) + 25;
+	let b1YPos = parseFloat(bumper1.style.top) + 25;
+	
+	let pXPos = parseFloat(player.style.left) + 10;
+	let pYPos = parseFloat(player.style.top) + 10;
+	
+	let bRadius = 25;
+	let pRadius = 10;
+	
+	// collision when dist between coords is less than or equal to sum of radii
+	// sum of radii is 35
+	// so when pythag of Xdiff and Ydiff <= 35, collision.
+	
+	let collDist = 35;
+	
+	let objDist = Math.sqrt(Math.pow(b1XPos - pXPos,2) + Math.pow(b1YPos - pYPos,2));
+	
+	if(objDist <= 35){
+		// Collision!
+	}
+	
+	
+}
+
 setInterval(function(){
+
+	checkCollision();
+
 	if(forceArr[0] == 0 && forceArr[2] == 0){
 		yAccel = -0.48 * yVel; // friction!
 	}
@@ -156,7 +201,6 @@ setInterval(function(){
 	document.querySelector('div#char').style.left = xDisp + "px";
 	document.querySelector('div#char').style.top = yDisp + "px";
 	instant = Date.now();
-	console.log('working')
 },25);
 </script>
 
@@ -166,9 +210,17 @@ setInterval(function(){
 
 <div id="stage1">
 
-<div id="wasd"><span id="w">W</span><br /><span id="a">A</span><span id="s">S</span><span id="d">D</span></div>
+
+<div id="wasd">
+	<span id="w">W</span>
+	<br />
+	<span id="a">A</span>
+	<span id="s">S</span>
+	<span id="d">D</span>
+</div>
 
 <div id="char"></div>
+<div id="bumper-1" style="top:0px;left:500px"></div>
 
 </div>
 
