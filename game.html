@@ -35,9 +35,16 @@ div#wasd {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+	line-height: 90%;
 }
 
+div#wasd span {
+	padding: 4px;
+}
 
+span#w, span#a, span#s, span#d {opacity: 0.2;}
+
+.wasdShow {opacity: 1 !important;}
 	
 
 </style>
@@ -75,21 +82,25 @@ window.addEventListener('keydown',function(e){
 			yAccel += -75;
 			if(yAccel < -75){yAccel = -75;}
 			forceArr[0]="w";
+			document.querySelector('span#w').classList.add('wasdShow');
 			break;
 		case 'a':
 			xAccel += -75;
 			if(xAccel < -75){xAccel = -75;}
 			forceArr[1]="a";
+			document.querySelector('span#a').classList.add('wasdShow');
 			break;
 		case 's':
 			yAccel += 75;
 			if(yAccel > 75){yAccel = 75;}
 			forceArr[2]="s";
+			document.querySelector('span#s').classList.add('wasdShow');
 			break;
 		case 'd':
 			xAccel += 75;
 			if(xAccel > 75){xAccel = 75;}
 			forceArr[3]="d";
+			document.querySelector('span#d').classList.add('wasdShow');
 			break;
 	}
 });
@@ -99,18 +110,22 @@ window.addEventListener('keyup',function(e){
 		case 'w':
 			yAccel -= -75;
 			forceArr[0]=0;
+			document.querySelector('span#w').classList.remove('wasdShow');
 			break;
 		case 'a':
 			xAccel -= -75;
 			forceArr[1]=0;
+			document.querySelector('span#a').classList.remove('wasdShow');
 			break;
 		case 's':
 			yAccel -= 75;
 			forceArr[2]=0;
+			document.querySelector('span#s').classList.remove('wasdShow');
 			break;
 		case 'd':
 			xAccel -= 75;
 			forceArr[3]=0;
+			document.querySelector('span#d').classList.remove('wasdShow');
 			break;
 	}
 });
@@ -151,7 +166,7 @@ setInterval(function(){
 
 <div id="stage1">
 
-<div id="wasd">WASD</div>
+<div id="wasd"><span id="w">W</span><br /><span id="a">A</span><span id="s">S</span><span id="d">D</span></div>
 
 <div id="char"></div>
 
