@@ -9,9 +9,10 @@
 	margin: auto;
 	border: 1px solid black;
 	border-radius: 50%;
-	position: absolute;
-	top: 300px;
-	left: 900px;
+	position: relative;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	left: 50%;
 	transform-origin: 50% 50%;
 }
 
@@ -25,6 +26,19 @@
 	transform: translateY(-50%);
 	transform-origin: 100% 50%;
 	}
+	
+table {
+	width: 100%;
+	height: 100%;
+}
+tr {
+	width: 100%;
+	height: auto;
+}
+td {
+	width: auto;
+	height: auto;
+}
 
 </style>
 
@@ -32,29 +46,45 @@
 
 let iota = 0;
 
+window.onload = function(){
+
+	let cells = document.querySelectorAll('td');
+
+	cells.forEach(function(cell){
+		cell.innerHTML = "<div class='origin'><div class='line'></div></div>";
+	});
+
+};
 
 
 window.addEventListener('mousemove',function(e){
-	let cursorX = e.clientX;
-	let cursorY = e.clientY;
-	let originRect = document.querySelector('.origin').getBoundingClientRect();
+
+	let rotators = document.querySelectorAll('.origin');
 	
-	let originCentreX = ((originRect.right - originRect.left)/2) + originRect.left;
-	let originCentreY = ((originRect.bottom - originRect.top)/2) + originRect.top;
+	rotators.forEach(function(spinner){
+		let cursorX = e.clientX;
+		let cursorY = e.clientY;
+		let originRect = spinner.getBoundingClientRect();
 	
-	if(originCentreX > cursorX && originCentreY > cursorY){iota = Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
-	if(originCentreX < cursorX && originCentreY > cursorY){iota = Math.PI + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
-	if(originCentreX < cursorX && originCentreY < cursorY){iota = Math.PI + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
-	if(originCentreX > cursorX && originCentreY < cursorY){iota = (2 * Math.PI) + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
+		let originCentreX = ((originRect.right - originRect.left)/2) + originRect.left;
+		let originCentreY = ((originRect.bottom - originRect.top)/2) + originRect.top;
+	
+		if(originCentreX > cursorX && originCentreY > cursorY){iota = Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
+		if(originCentreX < cursorX && originCentreY > cursorY){iota = Math.PI + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
+		if(originCentreX < cursorX && originCentreY < cursorY){iota = Math.PI + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
+		if(originCentreX > cursorX && originCentreY < cursorY){iota = (2 * Math.PI) + Math.atan((originCentreY - cursorY)/(originCentreX - cursorX));}
 		
-	if(originCentreX > cursorX && originCentreY == cursorY){iota = 0;}
-	if(originCentreX == cursorX && originCentreY > cursorY){iota = Math.PI * (1/2);}
-	if(originCentreX < cursorX && originCentreY == cursorY){iota = Math.PI;}
-	if(originCentreX == cursorX && originCentreY < cursorY){iota = Math.PI * (3/2);}
+		if(originCentreX > cursorX && originCentreY == cursorY){iota = 0;}
+		if(originCentreX == cursorX && originCentreY > cursorY){iota = Math.PI * (1/2);}
+		if(originCentreX < cursorX && originCentreY == cursorY){iota = Math.PI;}
+		if(originCentreX == cursorX && originCentreY < cursorY){iota = Math.PI * (3/2);}
 	
-	document.querySelector('.line').style = "transform:rotate(" + iota + "rad);";
+		spinner.children[0].style = "transform:rotate(" + iota + "rad);";
 	
-	console.log(iota);
+	});
+	
+
+	
 });
 </script>
 
@@ -63,9 +93,23 @@ window.addEventListener('mousemove',function(e){
 
 <body>
 
-<div class="origin">
-	<div class="line"></div>
-</div>
+<table>
+
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+
+
+
+</table>
 
 </body>
 
