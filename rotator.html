@@ -89,7 +89,7 @@ window.addEventListener('mousemove',function(e){
 		let originCentreX = ((originRect.right - originRect.left)/2) + originRect.left;
 		let originCentreY = ((originRect.bottom - originRect.top)/2) + originRect.top;
 		
-		// Math.atan() works shit so I've brute-forced it working out iota (angle of line joining cursor to origin)
+		// Math.atan() works shit so I've brute-forced it to work out iota properly as angle measured anti-clockwise from x-axis in radians (angle of line joining cursor to origin)
 		// one statement for each of four XY quadrants
 		// +
 		// one statement for each of four axis locations
