@@ -3,8 +3,8 @@
 <head>
 <style>
 .origin {
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: 100%;
 	display: inline-block;
 	margin: auto;
 	border: 1px solid black;
@@ -28,16 +28,18 @@
 	}
 	
 table {
-	width: 100%;
-	height: 100%;
+	width: 100vh;
+	height: 100vh;
+	margin: auto;
 }
 tr {
-	width: 100%;
+	width: auto;
 	height: auto;
 }
 td {
 	width: auto;
 	height: auto;
+	border-collapse: collapse;
 }
 
 </style>
@@ -48,10 +50,26 @@ let iota = 0;
 
 window.onload = function(){
 
-	let cells = document.querySelectorAll('td');
+	let tables = document.querySelectorAll('tbody');
 
+	tables.forEach(function(table){
+		for(i=0; i<10; i++){
+			table.innerHTML += "<tr></tr>";
+		}
+	});
+	
+	let rows = document.querySelectorAll('tr');
+	
+	rows.forEach(function(row){
+		for(i=0; i<10; i++){
+			row.innerHTML += "<td></td>";
+		}
+	});
+	
+	let cells = document.querySelectorAll('td');
+	
 	cells.forEach(function(cell){
-		cell.innerHTML = "<div class='origin'><div class='line'></div></div>";
+		cell.innerHTML += "<div class='origin'><div class='line'></div></div>";
 	});
 
 };
@@ -93,23 +111,7 @@ window.addEventListener('mousemove',function(e){
 
 <body>
 
-<table>
-
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-
-
-
-
-</table>
+<table><tbody></tbody></table>
 
 </body>
 
