@@ -5,32 +5,28 @@
 .origin {
 	width: 100%;
 	height: 100%;
-	display: inline-block;
-	margin: auto;
-	border: 1px solid black;
-	border-radius: 50%;
+	margin: 0;
 	position: relative;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	left: 50%;
-	transform-origin: 50% 50%;
+	border-radius: 50%;
+	
 }
 
 .line {
+	transform-origin: 100% 50%;
 	width: 50%;
-	height: 3px;
+	height: 2px;
 	border: none;
 	background: black;
 	position: absolute;
 	top:50%;
 	transform: translateY(-50%);
-	transform-origin: 100% 50%;
-	}
+}
 	
 table {
 	width: 100vh;
 	height: 100vh;
 	margin: auto;
+	border-collapse: collapse;
 }
 tr {
 	width: auto;
@@ -39,7 +35,7 @@ tr {
 td {
 	width: auto;
 	height: auto;
-	border-collapse: collapse;
+	border-radius: 50%;
 }
 
 </style>
@@ -47,6 +43,8 @@ td {
 <script>
 
 let iota = 0;
+
+let rotators = [];
 
 window.onload = function(){
 
@@ -71,17 +69,24 @@ window.onload = function(){
 	cells.forEach(function(cell){
 		cell.innerHTML += "<div class='origin'><div class='line'></div></div>";
 	});
+	
+	rotators = document.querySelectorAll('.origin');
+	
+	updateRotators();
 
 };
 
 
 window.addEventListener('mousemove',function(e){
-
-	let rotators = document.querySelectorAll('.origin');
 	
 	let cursorX = e.clientX;
 	let cursorY = e.clientY;
 	
+	updateRotators(cursorX, cursorY);
+	
+});
+
+function updateRotators(cursorX, cursorY){
 	rotators.forEach(function(spinner){
 		
 		let originRect = spinner.getBoundingClientRect();
@@ -104,13 +109,10 @@ window.addEventListener('mousemove',function(e){
 		if(originCentreX < cursorX && originCentreY == cursorY){iota = Math.PI;}
 		if(originCentreX == cursorX && originCentreY < cursorY){iota = Math.PI * (3/2);}
 	
-		spinner.children[0].style = "transform:rotate(" + iota + "rad);";
+		spinner.style = "transform:rotate(" + iota + "rad)";
 	
 	});
-	
-
-	
-});
+}
 </script>
 
 </head>
