@@ -14,7 +14,7 @@ body {overflow: hidden;}
 <script>
 let timeStamp = 0;
 
-let gravity = 500;
+let gravity = 700;
 
 window.onload = function(){
 	window.resizeTo(window.width, window.height);
@@ -36,7 +36,6 @@ window.onload = function(){
 		
 		blob.setAttribute('data-xVel', xVel);
 		blob.setAttribute('data-yVel', yVel);
-		blob.setAttribute('data-maxyVel', yVel);
 		
 		document.querySelector('body').append(blob);
 	}
@@ -68,7 +67,7 @@ setInterval(function(){
 			let currentBlobXVel = blob.getAttribute('data-xvel');
 			let currentBlobYVel = parseFloat(blob.getAttribute('data-yvel')) + (deltaT * gravity);
 			blob.setAttribute('data-yvel', currentBlobYVel);
-			if(currentBlobYVel >= parseFloat(blob.getAttribute('data-maxyVel'))){currentBlobYVel = parseFloat(blob.getAttribute('data-maxyVel'))}
+			
 		
 			let newBlobX = currentBlobX + (currentBlobXVel * deltaT);
 			let newBlobY = currentBlobY + (currentBlobYVel * deltaT);
