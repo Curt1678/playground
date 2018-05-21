@@ -49,7 +49,7 @@ setInterval(function(){
 			let newBlobX = currentBlobX + (currentBlobXVel * deltaT);
 			let newBlobY = currentBlobY + (currentBlobYVel * deltaT);
 		
-			blob.style = "top: " + newBlobY + "px; left: " + newBlobX + "px;"; 
+			 
 
 			if(newBlobX <= 0 || newBlobX >= (window.innerWidth - 20)){
 				blob.setAttribute('data-xvel', -1 * (blob.getAttribute('data-xvel')));
@@ -61,6 +61,8 @@ setInterval(function(){
 				if(newBlobY <= 0){newBlobY = 0}
 				if(newBlobY >= (window.innerHeight - 20)){newBlobY = (window.innerWidth - 20)}
 			}
+			
+			blob.style = "top: " + newBlobY + "px; left: " + newBlobX + "px;";
 		});
 	timeStamp = Date.now();
 	}
