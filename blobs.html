@@ -8,12 +8,16 @@
 	border-radius: 50%;
 	position: absolute;
 }
+
+body {overflow: hidden;}
 </style>
 
 <script>
 let timeStamp = 0;
 
 window.onload = function(){
+	window.resizeTo(window.width, window.height);
+	
 	for(i=0; i<50; i++){
 		let blob = document.createElement('div');
 		blob.classList.add('blob');
@@ -38,6 +42,9 @@ setInterval(function(){
 	else{
 		let blobs = document.querySelectorAll('div.blob');
 		let deltaT = (Date.now() - timeStamp)/1000;
+		
+		let windowWidth = window.innerWidth;
+		let windowHeight = window.innerHeight;
 	
 		blobs.forEach(function(blob){
 			let currentBlobX = parseFloat(blob.style.left);
@@ -51,15 +58,15 @@ setInterval(function(){
 		
 			 
 
-			if(newBlobX <= 0 || newBlobX >= (window.innerWidth - 20)){
+			if(newBlobX <= 0 || newBlobX >= (windowWidth - 20)){
 				blob.setAttribute('data-xvel', -1 * (blob.getAttribute('data-xvel')));
 				if(newBlobX <= 0){newBlobX = 0}
-				if(newBlobX >= (window.innerWidth - 20)){newBlobX = (window.innerWidth - 20)}
+				if(newBlobX >= (windowWidth - 20)){newBlobX = (windowWidth - 20)}
 			}
 			if(newBlobY <= 0 || newBlobY >= (window.innerHeight - 20)){
 				blob.setAttribute('data-yvel', -1 * (blob.getAttribute('data-yvel')));
 				if(newBlobY <= 0){newBlobY = 0}
-				if(newBlobY >= (window.innerHeight - 20)){newBlobY = (window.innerWidth - 20)}
+				if(newBlobY >= (windowHeight - 20)){newBlobY = (windowHeight - 20)}
 			}
 			
 			blob.style = "top: " + newBlobY + "px; left: " + newBlobX + "px;";
