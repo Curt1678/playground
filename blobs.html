@@ -1,0 +1,71 @@
+<html>
+<head>
+<style>
+.blob {
+	width: 20px;
+	height: 20px;
+	background: black;
+	border-radius: 50%;
+	position: absolute;
+}
+</style>
+
+<script>
+let timeStamp = 0;
+
+window.onload = function(){
+	for(i=0; i<50; i++){
+		let blob = document.createElement('div');
+		blob.classList.add('blob');
+		let xBlob = Math.random() * window.innerWidth;
+		let yBlob = Math.random() * window.innerHeight;
+		
+		blob.style="top: " + yBlob + "px; left: " + xBlob + "px;";
+		
+		let xVel = (Math.random() * 500) - 250;
+		let yVel = (Math.random() * 500) - 250;
+		
+		blob.setAttribute('data-xVel', xVel);
+		blob.setAttribute('data-yVel', yVel);
+		
+		document.querySelector('body').append(blob);
+	}
+}
+
+setInterval(function(){
+	if(timeStamp == 0){timeStamp = Date.now();}
+	
+	else{
+		let blobs = document.querySelectorAll('div.blob');
+		let deltaT = (Date.now() - timeStamp)/1000;
+	
+		blobs.forEach(function(blob){
+			let currentBlobX = parseFloat(blob.style.left);
+			let currentBlobY = parseFloat(blob.style.top);
+		
+			let currentBlobXVel = blob.getAttribute('data-xvel');
+			let currentBlobYVel = blob.getAttribute('data-yvel');
+		
+			let newBlobX = currentBlobX + (currentBlobXVel * deltaT);
+			let newBlobY = currentBlobY + (currentBlobYVel * deltaT);
+		
+			blob.style = "top: " + newBlobY + "px; left: " + newBlobX + "px;"; 
+
+			if(newBlobX <= 0 || newBlobX >= (window.innerWidth - 20)){
+				blob.setAttribute('data-xvel', -1 * (blob.getAttribute('data-xvel')));
+			}
+			if(newBlobY <= 0 || newBlobY >= (window.innerHeight - 20)){
+				blob.setAttribute('data-yvel', -1 * (blob.getAttribute('data-yvel')));
+			}
+		});
+	timeStamp = Date.now();
+	}
+},30);
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>
