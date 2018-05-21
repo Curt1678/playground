@@ -1,0 +1,71 @@
+<html>
+<head>
+
+<style>
+.fan-blade {
+	height: 45vh;
+	width: 6vw;
+	background: #000;
+	border-radius: 30% 30% 80% 80%;	
+	animation: blade 1s infinite;
+	animation-timing-function: linear;
+	position: relative;
+	bottom: 0px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.fan-container {
+	/*animation: spin 1s infinite;
+	animation-timing-function: linear;*/
+	width: 6vw;
+	height: 45vh;
+	transform-origin: 50% 100%;
+}
+
+@keyframes blade {
+	0% {
+		width: 6vw;
+		height: 45vh;
+	}
+	25% {
+		width: 3vw;
+		height: 5vh;		
+	}
+	50% {
+		width: 6vw;
+		height: 45vh;
+	}
+	75% {
+		width: 9vw;
+		height: 5vh;
+	}
+	100% {
+		width: 6vw;
+		height: 45vh;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+
+</style>
+
+<script>
+
+</script>
+
+</head>
+
+<body>
+<div class="fan-container">
+	<div class="fan-blade"></div>
+</div>
+</body>
+
+</html>
