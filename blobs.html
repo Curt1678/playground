@@ -53,9 +53,13 @@ setInterval(function(){
 
 			if(newBlobX <= 0 || newBlobX >= (window.innerWidth - 20)){
 				blob.setAttribute('data-xvel', -1 * (blob.getAttribute('data-xvel')));
+				if(newBlobX <= 0){newBlobX = 0}
+				if(newBlobX >= (window.innerWidth - 20)){newBlobX = (window.innerWidth - 20)}
 			}
 			if(newBlobY <= 0 || newBlobY >= (window.innerHeight - 20)){
 				blob.setAttribute('data-yvel', -1 * (blob.getAttribute('data-yvel')));
+				if(newBlobY <= 0){newBlobY = 0}
+				if(newBlobY >= (window.innerHeight - 20)){newBlobY = (window.innerWidth - 20)}
 			}
 		});
 	timeStamp = Date.now();
