@@ -1,0 +1,132 @@
+<html>
+<head>
+
+<style>
+.club {
+	width: 2px;
+	height: 40px;
+	background: #000;
+	position: absolute;
+	bottom: 50px;
+	left: 50px;
+	transform-origin: 50% 0%;
+	transform: rotate(60deg);
+}
+
+.ball {
+	border-radius: 50%;
+	background: #000;
+	width: 4px;
+	height: 4px;
+	position: absolute;
+}
+
+.energy-bar {
+	position: absolute;
+	bottom: 15px;
+	left: 20px;
+	width: 200px;
+	height: 20px;
+	border: 1px solid #000;
+}
+
+.energy {
+	background: #ff8040;
+	height: 20px;
+}
+</style>
+
+<script>
+
+// zig-zag function is y = (1/pi)*arccos(cos(x))
+
+let gravity = -900;
+
+let energyWidth = 0;
+let counter = 0;
+
+let SBDown = 0;
+
+let timeStamp = 0;
+
+
+window.addEventListener('keydown',function(e){
+	let ball = document.querySelector('div.ball');
+	ball.style = "bottom: 50px; left: 50px;";
+	ball.setAttribute('xVel',0);
+	ball.setAttribute('yVel',0)
+	switch(e.key){
+		case " ":
+			if(SBDown == 0){
+				SBDown = 1;
+				counter = 0;
+				energyWidth = 0;
+				window.energyGrow = setInterval(function(){
+					counter++;
+					energyWidth = 100 * (1/Math.PI) * Math.acos(Math.cos(counter/10));
+					document.querySelector('div.energy').style = "width: " + energyWidth.toString() + "%;"; 
+					console.log(energyWidth);
+				},35);
+			}			
+	}
+});
+
+window.addEventListener('keyup',function(e){
+	switch(e.key){
+		case " ":
+			clearInterval(window.energyGrow);
+			SBDown = 0;
+			timeStamp = 0;
+			swing();
+	}
+});
+
+function swing(){
+	let energyValue = parseFloat(document.querySelector('div.energy').style.width);
+	
+	let velComponent = Math.pow(2,(-1/2)) * 12.7 * energyValue;
+	console.log('initial VelComp is ' + velComponent);
+	
+	let ball = document.querySelector('div.ball');
+	ball.setAttribute('xVel',velComponent);
+	ball.setAttribute('yVel',velComponent); // ball is launched at 45deg to x-axis 
+	
+	let ballistics = setInterval(function(){
+		if(timeStamp == 0){timeStamp = Date.now();}
+		
+		let ball = document.querySelector('div.ball');
+		let ballIniYVel = parseFloat(ball.getAttribute('yVel'));
+		let ballIniXVel = parseFloat(ball.getAttribute('xVel'))
+		
+		let ballIniX = parseFloat(ball.style.left);
+		let ballIniY = parseFloat(ball.style.bottom);
+		
+		let deltaT = (Date.now() - timeStamp)/1000;
+		
+		ball.style = "bottom: " + (ballIniY + (ballIniYVel * deltaT)).toString() + "px; left: " + (ballIniX + (ballIniXVel * deltaT)).toString() + "px;"
+		ball.setAttribute('yVel',(parseFloat(ball.getAttribute('yVel')) + (gravity * deltaT)));
+		
+		timeStamp = Date.now();
+		
+		if(parseFloat(ball.style.bottom) < 50){
+			clearInterval(ballistics);
+		}
+		
+		
+		
+		
+	},20);
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="club"></div>
+<div class="ball" style="bottom: 50px; left: 50px;"></div>
+<div class="energy-bar">
+	<div class="energy" style="width: 0%"></div>
+</div>
+</body>
+</html>
