@@ -2,69 +2,142 @@
 <head>
 
 <style>
+.container-container {
+	position: absolute;
+	left: 50%
+}
+
 .fan-blade {
 	height: 45vh;
 	width: 6vw;
 	background: #000;
 	border-radius: 30% 30% 80% 80%;	
-	animation: blade 1s infinite;
-	animation-timing-function: linear;
-	position: relative;
+	position: absolute;
 	bottom: 0px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
+.fan-blade-1 {
+	animation: blade1 1.5s infinite;
+	animation-timing-function: linear;
+}
+
+.fan-blade-2 {
+	animation: blade2 1.5s infinite;
+	animation-timing-function: linear;
+}
+
+.fan-blade-3 {
+	animation: blade3 1.5s infinite;
+	animation-timing-function: linear;
+}
+
 .fan-container {
-	/*animation: spin 1s infinite;
-	animation-timing-function: linear;*/
 	width: 6vw;
 	height: 45vh;
+	position: relative;
 	transform-origin: 50% 100%;
 }
 
-@keyframes blade {
-	0% {
-		width: 6vw;
-		height: 45vh;
-	}
-	25% {
-		width: 3vw;
-		height: 5vh;		
-	}
-	50% {
-		width: 6vw;
-		height: 45vh;
-	}
-	75% {
-		width: 9vw;
-		height: 5vh;
-	}
-	100% {
-		width: 6vw;
-		height: 45vh;
-	}
+.fan-container-1 {
+	animation: spin1 1.5s infinite;
+	animation-timing-function: linear;
 }
 
-@keyframes spin {
+.fan-container-2 {
+	animation: spin2 1.5s infinite;
+	animation-timing-function: linear;
+}
+
+.fan-container-3 {
+	animation: spin3 1.5s infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes spin1 {
 	0% {
 		transform: rotate(0deg);
 	}
 	100% {
 		transform: rotate(360deg);
 	}
+}
+	
+@keyframes spin2 {
+	0% {
+		transform: rotate(120deg);
+	}
+	100% {
+		transform: rotate(480deg);
+	}
+}
+	
+@keyframes spin3 {
+	0% {
+		transform: rotate(240deg);
+	}
+	100% {
+		transform: rotate(600deg);
+	}
+}
 
 </style>
 
 <script>
+
+window.onload = function(){
+	let bladeStyle = document.createElement('style');
+	bladeStyle.id = "blade-style";
+	
+	// maths for animation on blade 1
+	bladeStyle.innerHTML += "@keyframes blade1 { ";
+	for(i=0; i<360; i++){
+		bladeStyle.innerHTML += ((i/360)*100).toString() + "% { width:" + (((-1*Math.sin((i*Math.PI)/180))*3) + 6).toString() + "vw;";
+		bladeStyle.innerHTML += "height:" + (((-1*(Math.pow(Math.sin((i*Math.PI)/180),2)))*40)+45).toString() + "vh;}";
+	}
+	bladeStyle.innerHTML += "}";
+	
+	// maths for animation on blade 2 (PI/3 out of phase) 
+	bladeStyle.innerHTML += "@keyframes blade2 { ";
+	for(i=0; i<360; i++){
+		bladeStyle.innerHTML += ((i/360)*100).toString() + "% { width:" + (((-1*Math.sin(((i*Math.PI)/180)+((2*Math.PI) / 3)))*3) + 6).toString() + "vw;";
+		bladeStyle.innerHTML += "height:" + (((-1*(Math.pow(Math.sin((i*Math.PI)/180),2)))*40)+45).toString() + "vh;}";
+	}
+	bladeStyle.innerHTML += "}";
+	
+	// maths for animation on blade 3 (2PI/3 out of phase)
+	bladeStyle.innerHTML += "@keyframes blade3 { ";
+	for(i=0; i<360; i++){
+		bladeStyle.innerHTML += ((i/360)*100).toString() + "% { width:" + (((-1*Math.sin(((i*Math.PI)/180)+ ((4*Math.PI)/3)))*3) + 6).toString() + "vw;";
+		bladeStyle.innerHTML += "height:" + (((-1*(Math.pow(Math.sin((i*Math.PI)/180),2)))*40)+45).toString() + "vh;}";
+	}
+	bladeStyle.innerHTML += "}";
+	
+	document.querySelector('head').append(bladeStyle);
+};
 
 </script>
 
 </head>
 
 <body>
-<div class="fan-container">
-	<div class="fan-blade"></div>
+<div class="container-container">
+<div class="fan-container fan-container-1">
+	<div class="fan-blade fan-blade-1"></div>
+</div>
+</div>
+
+<div class="container-container">
+<div class="fan-container fan-container-2">
+	<div class="fan-blade fan-blade-2"></div>
+</div>
+</div>
+
+<div class="container-container">
+<div class="fan-container fan-container-3">
+	<div class="fan-blade fan-blade-3"></div>
+</div>
 </div>
 </body>
 
