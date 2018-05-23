@@ -1,0 +1,78 @@
+<html>
+<head>
+
+<style>
+body {
+	background: #000;
+	
+}
+.star {
+	position: absolute;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	z-index: 1;
+}
+.sun {
+	content: url("./planets/sun.png");
+	width: auto;
+	height: 10.5%;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	z-index: 2;
+	transform-origin: 50% 55%;
+	animation: sun-orbit 600s infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes sun-orbit {
+	0% {transform: translate(-50%, -50%) rotate(0deg);}
+	100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.mercury {
+	content: url("./planets/mercury.png");
+	width: auto;
+	height: 2.1%;
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	z-index: 2;
+	animation: mercury-orbit 60s infinite;
+	animation-timing-function: linear;
+	transform-origin: 50% 500%;
+}
+
+@keyframes mercury-orbit {
+	0% {transform: translate(-50%, -50%) rotate(0deg);}
+	100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+</style>
+
+<script>
+
+window.onload = function(){
+	for(i=0; i<200; i++){
+		let windowWidth = window.innerWidth;
+		let windowHeight = window.innerHeight;
+		let starX = Math.random() * 98;
+		let starY = Math.random() * 98;
+		let star = document.createElement('div');
+		
+		star.classList.add('star');
+		star.style = "left: " + starX.toString() + "%; top: " + starY.toString() + "%;";
+		
+		document.querySelector('body').append(star);		
+	}
+}
+</script>
+
+</head>
+
+<body>
+<div class="sun"></div>
+<div class="mercury"></div>
+<div class="venus"></div>
+</body>
+</html>
