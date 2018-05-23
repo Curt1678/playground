@@ -16,7 +16,7 @@ body {
 .sun {
 	content: url("./planets/sun.png");
 	width: auto;
-	height: 10.5%;
+	height: 12.5%;
 	position: absolute;
 	top: 45%;
 	left: 50%;
@@ -45,6 +45,24 @@ body {
 }
 
 @keyframes mercury-orbit {
+	0% {transform: translate(-50%, -50%) rotate(0deg);}
+	100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.venus {
+	content: url("./planets/venus.png");
+	width: auto;
+	height: 5.25%;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	z-index: 2;
+	animation: venus-orbit 180s infinite;
+	animation-timing-function: linear;
+	transform-origin: 50% 320%;
+}
+
+@keyframes venus-orbit {
 	0% {transform: translate(-50%, -50%) rotate(0deg);}
 	100% {transform: translate(-50%, -50%) rotate(360deg);}
 }
