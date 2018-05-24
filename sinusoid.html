@@ -43,7 +43,7 @@ window.onload = function(){
 	styleTag.innerHTML += "@keyframes sinusoid { ";
 	
 	for(i=0; i<100; i++){
-		let height = -200 * Math.sin((i/100)*(2*Math.PI));
+		let height = -300 * Math.sin((i/100)*(2*Math.PI));
 		styleTag.innerHTML += i.toString() + "% { transform:translateY(" + height.toString() + "px) }";
 	}
 	
@@ -53,7 +53,8 @@ window.onload = function(){
 </script>
 </head>
 
-<body></body>
+<body>
+</body>
 
 
 
