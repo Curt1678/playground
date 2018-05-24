@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<style>
+.point {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #000;
+	position: absolute;
+	top: 50%;
+	animation: sinusoid 2s infinite;
+	animation-timing-function: linear;
+}
+</style>
+<script>
+window.onload = function(){
+	let quantity = 100;
+	
+	let windowWidth = window.innerWidth;
+	
+	
+	
+	for(i=0; i<quantity; i++){
+	
+		let delay = (i/quantity) * 2;
+	
+		let xCoord = (i/quantity)*windowWidth;
+		
+		let point = document.createElement('div');
+		
+		point.classList.add('point');
+		
+		point.style = "left:" + xCoord + "px; animation-delay: " + delay.toString() + "s;";
+		
+		document.querySelector('body').append(point);
+	}
+	
+	// now for the keyframe generation
+	
+	let styleTag = document.querySelector('style');
+	
+	styleTag.innerHTML += "@keyframes sinusoid { ";
+	
+	for(i=0; i<100; i++){
+		let height = -200 * Math.sin((i/100)*(2*Math.PI));
+		styleTag.innerHTML += i.toString() + "% { transform:translateY(" + height.toString() + "px) }";
+	}
+	
+	styleTag.innerHTML += "}";
+}
+
+</script>
+</head>
+
+<body></body>
+
+
+
+</html>
