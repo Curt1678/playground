@@ -11,7 +11,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	animation: figureOfEight 4s linear infinite;
+	animation: figureOfEight 5s linear infinite;
 }
 </style>
 
@@ -36,12 +36,12 @@ window.onload = function(){
 	
 	document.querySelector('head').append(animationTag);
 	
-	// finish keyframe generation
+	// generate tracer divs
 	
 	for(i=0; i<50; i++){
 		let tracer = document.createElement('div');
 		tracer.classList.add('tracer');
-		tracer.style="animation-delay:" + (i*0.04).toString() + "s;";
+		tracer.style="animation-delay:" + (i*0.05).toString() + "s;";
 		document.querySelector('body').append(tracer);
 	}
 };
