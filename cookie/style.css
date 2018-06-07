@@ -1,0 +1,61 @@
+body {
+	position: relative;
+}
+
+.image-wrapper {
+	position: absolute;
+	transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+div#cookie {
+	border: 1px solid black;
+	border-radius: 50%;
+	margin: auto;
+	width: 300px;
+	height: 300px;
+	top: 40%;
+	position: relative;
+	transform: translateY(-50%);
+}
+	
+div#counter {
+	font-family: 'Roboto', sans-serif;
+	margin: auto;
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	user-select: none;
+	font-size:300%;
+}
+
+div#rate {
+	font-style: italic;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	display: inline-block;
+}
+span#rateSpan {
+	font-weight: bold;	
+}
+	
+.active {transform: translateY(-48%) !important;}
+
+button {}
+
+ul#autosList {line-height: 150%; list-style: none;}
+
+ul#autosList li button.autoLabel {height: 3em; width: 12em; float:left;}
+ul#autosList li button.autoAmm {height: 3em; width: 3em; color: #000; font-weight: bold;}
+
+.cursorText {
+	user-select: none;
+}
+
+@keyframes cursorImageFade {
+	0% {transform: translateY(0%); opacity: 1;}
+	100% {transform: translateY(-150%); opacity: 0;}
+}

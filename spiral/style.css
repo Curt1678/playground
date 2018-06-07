@@ -1,0 +1,25 @@
+.container {
+	width: 60vh;
+	height: 60vh;
+	/*border: 1px solid #000;*/
+	animation: rotate 5s linear infinite;
+	position: absolute;
+	top: 20vh;	
+	transform-origin: 50% 50%;
+	display: flex;
+	align-items: center;
+}
+
+.tracer {
+	width: 5px;
+	height: 5px;
+	background: #000;
+	border-radius: 50%;
+	margin: auto;
+	animation: oscillate 60s linear infinite;
+}
+
+@keyframes rotate {
+	0% {transform: rotate(0deg)}
+	100% {transform: rotate(360deg)}
+}

@@ -1,0 +1,25 @@
+.container {
+	border: 1px solid black;
+	height: 500px;
+	width: 1500px;
+	margin: auto;
+	position: relative;
+	top:50%;
+	transform: translateY(-50%);
+	overflow: hidden;
+}
+
+.bird {
+	width: 30px;
+	height: 30px;
+	background: brown;
+	position: absolute;
+	left: 200px;
+}
+
+.block {
+	height: 200px;
+	width: 50px;
+	background: black;
+	position: absolute;
+}

@@ -1,0 +1,50 @@
+div#stage1 {
+	width: 95%;
+	height: 200px;
+	margin-left:auto;
+	margin-right:auto;
+	top: 50%;
+	position: relative;
+	transform: translateY(-50%);
+	border: 1px solid #000;
+}
+
+div#char {
+	width:20px;
+	height:20px;
+	border-radius: 50%;
+	background-color: red;
+	border:1px solid red;
+	position: absolute;
+}
+
+div#bumper-1 {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 1px solid #000;
+	position: absolute;
+	
+}
+
+div#wasd {
+	text-align: center;
+	width: auto;
+	font-size: 100px;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	line-height: 90%;
+	border: 1px solid #c0c0c0;
+	display: inline-block;
+}
+
+div#wasd span {
+	padding: 4px;
+}
+
+span#w, span#a, span#s, span#d {opacity: 0.2;}
+
+.wasd-show {opacity: 1 !important;}

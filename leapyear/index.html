@@ -1,0 +1,195 @@
+<head>
+
+<link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+
+<style id="colorChangeKeyframe"></style>
+
+<style id="backgroundColor">
+	.container {
+		animation-name: colorCycle;
+		animation-iteration-count: infinite;
+	}
+</style>
+<style id="seizureControl">
+	.container {
+		animation-duration: 20s;
+	}
+</style>
+<style id="textColor">
+	.container:not(input){color: #000;}
+</style>
+
+<link rel="stylesheet" href="./style.css">
+<script src="./functions.js"></script> 
+
+
+
+</head>
+
+<body>
+<div class="container">
+
+<h1>Some Cool JS Functions</h1>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- background color -->
+
+<p>Background colour of container: <input id="BGCTag" type="color" onchange="changeBackground()" oninput="changeBackground()" value="#bbffdd"/> &nbsp; <button onclick="backgroundReturn()">Return to Cycle</button></p>
+
+<p>Seizure Control: <input id="seizureControl" onchange="seizureControl()" type="range" value="0" min="0" max="19900" step="100"/></p>
+
+<p>Colour of text: <input id="TCTag" type="color" value="#000000" onchange="changeText()" oninput="changeText()" /></p>
+
+<p>Border Radius: <input id="radiusInput" type="range" min="0" max="100" value="3" onchange="changeRadius()"oninput="changeRadius()" /></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- leap years! -->
+
+<h3>Leap Years</h3>
+
+<input id="input" type="number" placeholder="Year" />&nbsp;<button onclick="fill()">Go</button>
+<br /><br />
+<input type="text" id="output" />
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- calculator! -->
+
+<h3>Calculator</h3>
+
+<p><label for="one">1st Number:</label><input id="one" type="number" /></p>
+<p><label for="two">2nd Number:</label><input id="two" type="number" /></p>
+<p><button onclick="multiply()">Multiply</button>&nbsp;<button onclick="divide()">Divide</button>
+<p><label for="result">Result:</label><input id="result" type="text" disabled style="border:none" /></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<h3>Temperature Conversion</h3>
+
+<!-- [ Formula : c/5 = (f-32)/9 [ where c = temperature in Celsius and f = temperature in Fahrenheit ] -->
+
+<p><label for="Celsius">Celsius:</label><input id="celsius" type="text" onkeyup="calcF()"/>&nbsp;&nbsp;&nbsp;<label for="Celsius">Fahrenheit:</label><input id="fahrenheit" type="text" onkeyup="calcC()" /></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- table creation--><h3>Table Creation/Destruction</h3>
+
+<p><label for="rows">Rows:</label>&nbsp;<input id="rows" type="number" />&nbsp;&nbsp;&nbsp;<label for="columns">Columns</label>&nbsp;<input id="columns" type="number" />&nbsp;&nbsp;&nbsp;<button onclick="tableCreate()">Create!</button>&nbsp;<button onclick="tableDestroy()">Destroy!</button>&nbsp;<span class="error">ERROR!</span></p>
+
+<div id="tables"></div>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- cutting words in half -->
+
+<h3>Cutting words in half</h3>
+
+<p><label for="wordCutter" >Word to be cut:</label>&nbsp;<input placeholder="Insert word here" type="text" id="wordCutter">&nbsp;<button onclick="cut()">Cut</button>
+<br />
+<p>Results: <input disabled type="text" id="cutResult1" />&nbsp;<input disabled type="text" id="cutResult2" /> 
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- remove items from list -->
+
+<h3>Select list addition and removal</h3>
+
+<p><select id="mySelect">
+	<option>Blue</option>
+	<option>Red</option>
+	<option>Green</option>
+	<option>Yellow</option>
+</select>
+<button onclick="remove()">Remove</button></p>
+
+
+<p><input type="text" id="addToSelect" />&nbsp;<button onclick="add()">Add</button></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- find highest in array -->
+
+<h3>Finding highest and lowest values in array</h3>
+
+<p>Number of elements: <input type="number" id="arraySize" class="arrayInput" />&nbsp; <button onclick="arrayGen()">Generate</button></p>
+
+<p>Input [ <span id="arrayLocation"></span> ]
+			&nbsp;
+			<button onclick="arrayHighest()">Find Highest</button>&nbsp;Highest:<input class="arrayInput centered blackText" type="text" disabled id="arrayHighest" />
+			&nbsp;
+			<button onclick="arrayLowest()">Find Lowest</button>&nbsp;Lowest:<input class="arrayInput centered blackText" type="text" disabled id="arrayLowest" />
+			</p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- Factors -->
+
+<h3>Factors and Perfect Numbers</h3>
+
+<p><label for="">Please input a number:</label>&nbsp;<input class="smallInput" id="factorInput" type="number" />&nbsp;<button onclick="getFactors()">Get Factors</button></p>
+<p><label for="factors">Factors:</label>&nbsp;<input class="blackText factorResult" disabled id="factors" type="text" /></p>
+<p><label for="perfect">Perfect Number? (<i>equal to sum of factors</i>)</label>&nbsp;<input class="blackText factorResult" disabled id="perfect" type="text" /></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- Roman Numerals -->
+
+<h3>Roman Numeral Converter</h3>
+
+<p>Number: <input type="text" id="number" onkeyup="romanConvert()" /> Roman Numerals:<input id="roman" type="text" onkeyup="numberConvert()" disabled /></p>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- fizz buzz -->
+
+<h3>Fizz Buzz</h3>
+
+<p>For multiples of &nbsp;<input id="fizzBuzzNumberOne" type="range" min="1" max="30" oninput="range1()" onchange="range1()" value="15" />&nbsp;<input type="text" disabled id="rangeReader1" value="15" />, print <input id="fizzBuzzWordOne" type="text" placeholder="Fizz" />.</p> 
+<p>For multiples of &nbsp;<input id="fizzBuzzNumberTwo" type="range" min="1" max="30" oninput="range2()" onchange="range2()" value="15" />&nbsp;<input type="text" disabled id="rangeReader2" value="15" />, print <input id="fizzBuzzWordTwo" type="text" placeholder="Buzz" />.</p>
+<p>Run up to &nbsp;<input id="fizzBuzzUpTo" type="range" min="0" max="250" oninput="range3()" onchange="range3()" value="125" />&nbsp;<input type="text" disabled id="rangeReader3" value="125" />&nbsp;<button onclick="fizzBuzz()">Go</button></p>
+
+<div id="fizzBuzzOutput"></div>
+
+<br /><br />
+<hr />
+<br /><br />
+
+<!-- Christmas Tree -->
+
+<h3>Christmas Tree</h3>
+
+<p>How tall would you like your Christmas tree? <input type="number" id="xmasHeight" value="7" />units &nbsp; <button onclick="buildXmasTree()">Build</button></p>
+
+<div id="xmasTree"></div>
+
+<br /><br />
+
+<br /><br />
+
+</div>
+
+</body>

@@ -1,0 +1,10 @@
+.point {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #000;
+	position: absolute;
+	top: 50%;
+	animation: sinusoid 2s infinite;
+	animation-timing-function: linear;
+}

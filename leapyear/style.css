@@ -1,0 +1,39 @@
+button[onclick="backgroundReturn()"] {display: none;}
+
+.container {margin:5% 10%; padding: 20px; border: 1px solid #cdcdcd; font-family: 'Mina', sans-serif; border-radius: 5px;}
+
+h1 {text-align: center;}
+
+td {width:30px;height:30px;border:1px solid black;}
+
+.arrayInput {width:50px;}
+
+.centered {text-align:center;}
+
+.blackText {color: #000;}
+
+.smallInput {width:50px;}
+
+.factorResult {border:none;width:500px;background:#fff;font-weight:bold;}
+
+.error {opacity: 0; font-weight: 600; color: #ff0000;}
+.errorTrigger { animation-name: errorFade; animation-duration: 0.25s; }
+
+@keyframes errorFade {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+#rangeReader1, #rangeReader2, #rangeReader3 {
+	border: none;
+	width: 50px;
+	text-align: center;
+}
+
+div#xmasTree {text-align:center; width: 500px; line-height: 10%;}
+
+#fizzBuzzUpTo {width: 346px}
+
+#xmasHeight {width: 34px;}
+
+input#radiusInput {border: 1px solid #cdcdcd;}

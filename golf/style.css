@@ -1,0 +1,89 @@
+.club {
+	width: 2px;
+	height: 40px;
+	background: #000;
+	position: absolute;
+	bottom: 50px;
+	left: 50px;
+	transform-origin: 50% 0%;
+	transform: rotate(60deg);
+}
+
+.ball {
+	border-radius: 50%;
+	background: #000;
+	width: 4px;
+	height: 4px;
+	position: absolute;
+}
+
+.energy-bar {
+	position: absolute;
+	bottom: 15px;
+	left: 20px;
+	width: 200px;
+	height: 20px;
+	border: 1px solid #000;
+}
+
+.energy {
+	background: #ff8040;
+	height: 20px;
+}
+
+button {
+	color: #000;
+	position: absolute;
+	bottom: 16px;
+	left: 240px;
+}
+
+.goal {
+	width: 100px;
+	height: 20px;
+	position: absolute;
+	bottom: 40px;
+	border-top: none;
+	border-left: 3px dashed #0000ff;
+	border-bottom: none;
+	border-right: 3px dashed #0000ff;
+}
+
+.result {
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.score {
+	position: absolute;
+	top: 200px;
+	right: 200px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.button-pressed {
+	border-style: inset;
+	focus-ring-color auto 5px;
+}
+
+.club-swing {
+	animation: swing 0.3s;
+	animation-timing-function: linear;
+}
+
+.swung {
+	transform: rotate(-60deg) !important;
+}
+
+@keyframes swing {
+	0% {transform: rotate(60deg)}
+	100% {transform: rotate(-60deg)}
+}
+
+.invisible {
+	opacity: 0;
+}

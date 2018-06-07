@@ -1,0 +1,31 @@
+<!-- calculator -->
+<html>
+<head>
+<link rel="stylesheet" href="./style.css">
+<script src="./functions.js"></script>
+</head>
+
+<body>
+
+<div id="calculator">
+
+<input id="display" type="text" disabled />
+
+<div class="buttons">
+<p><button id="1" onclick="input(1)">1</button><button id="2" onclick="input(2)">2</button><button id="3" onclick="input(3)">3</button><button id="plus" onclick="input('+')">+</button></p>
+<p><button id="4" onclick="input(4)">4</button><button id="5" onclick="input(5)">5</button><button id="6" onclick="input(6)">6</button><button id="minu" onclick="input('-')">-</button></p>
+<p><button id="7" onclick="input(7)">7</button><button id="8" onclick="input(8)">8</button><button id="9" onclick="input(9)">9</button><button id="mult" onclick="input('*')">x</button></p>
+<p><button id="C" onclick="input('C')">C</button><button id="0" onclick="input(0)">0</button><button id="." onclick="input('.')">.</button><button id="divi" onclick="input('/')">/</button></p>
+<p><button id="equ" onclick="input('=')">=</button></p>
+</div>
+
+<p style="display:none" id="first"></p>
+<p style="display:none"  id="operator"></p>
+<p style="display:none"  id="second"></p>
+<p style="display:none"  id="equals"></p>
+<p style="display:none"  id="answer"></p>
+
+</div>
+
+</body>
+</html>

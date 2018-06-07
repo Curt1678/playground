@@ -1,0 +1,6 @@
+#flicker {animation: flicker 0.5s infinite; animation-timing-function: step-end;}
+ 
+@keyframes flicker { 
+	0% {color: #000;} 
+	50% {color: #fff;}
+	}
