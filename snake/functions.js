@@ -56,6 +56,7 @@ window.onload=function(){
 
 		detectTail();		
 		detectEat();
+		detectBorder();
 		
 	},frequency);
 	
@@ -165,18 +166,35 @@ function detectTail(){
 		let tailSegY = parseInt(tailSegment.style.top);
 		
 		if(tailSegX == snakeMouthX && tailSegY == snakeMouthY){
-			for (var i = 1; i < 10; i++){
+			for (var i = 1; i < 100; i++){
 				window.clearInterval(i);
+				window.clearTimeout(i);
 			}        
 			fail();
 		}
 	});
 };
 
+function detectBorder(){
+	let snakeMouth = document.querySelector('.seg-1');
+	
+	let snakeMouthX = parseInt(snakeMouth.style.left);
+	let snakeMouthY = parseInt(snakeMouth.style.top);
+	
+	if(snakeMouthX <= -1 || snakeMouthX >= 100 || snakeMouthY <= -1 || snakeMouthY >= 100){
+		fail();
+	}
+};
+
 function fail(){
 	
 	let body = document.querySelector('body');
 	body.style = "opacity: 0.5";
+	
+	for(i=0; i<10; i++){
+		window.clearInterval(i);
+	}
+	
 	
 	let failMessage = document.createElement('div');
 	failMessage.classList.add('fail-message');
