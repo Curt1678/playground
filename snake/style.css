@@ -40,3 +40,11 @@
 	0% { transform:translateY(0px); opacity: 1; }
 	100% { transform: translateY(-15px); opacity: 0; }	
 }
+
+.apple {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: green;
+	position: absolute;
+}

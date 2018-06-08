@@ -2,7 +2,20 @@ window.onload=function(){
 	let velocityX = 0;
 	let velocityY = 0;
 	
+	let apple = document.createElement('div');
+	apple.classList.add('apple');
+	
+	let appleX = Math.floor(Math.random() * 100);
+	let appleY = Math.floor(Math.random() * 100);
+	
+	apple.style = "top: " + appleY.toString() + "%; left: " + appleX + "%;";
+	
+	document.querySelector('body').append(apple);
+	
 	let update = setInterval(function(){
+		
+		detectEat();
+		
 		let seg1 = document.querySelector('.seg-1');
 		
 		
@@ -88,4 +101,33 @@ window.onload=function(){
 				document.querySelector('.space-button').classList.remove('space-button-active');
 		}
 	});
-}
+};
+
+function detectEat(){
+	let snakeMouth = document.querySelector('.seg-1');
+	
+	let snakeMouthX = parseInt(snakeMouth.style.left);
+	let snakeMouthY = parseInt(snakeMouth.style.top);
+	
+	let apple = document.querySelector('.apple');
+	
+	let appleX = parseInt(apple.style.left);
+	let appleY = parseInt(apple.style.top);
+	
+	if(snakeMouthX == appleX && snakeMouthY == appleY){
+		apple.outerHTML = "";
+		createNewApple();
+	}
+};
+
+function createNewApple(){
+	let newApple = document.createElement('div');
+	newApple.classList.add('apple');
+	
+	let appleX = Math.floor(Math.random() * 100);
+	let appleY = Math.floor(Math.random() * 100);
+	
+	newApple.style = "top: " + appleY.toString() + "%; left: " + appleX + "%;";
+	
+	document.querySelector('body').append(newApple);
+};
