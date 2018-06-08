@@ -31,8 +31,6 @@
 
 .plusOne {
 	position: absolute;
-	top: 80%;
-	left: 53%;
 	animation: fade 1s linear;
 }
 
@@ -42,8 +40,8 @@
 }
 
 .apple {
-	width: 8px;
-	height: 8px;
+	width: 10px;
+	height: 10px;
 	border-radius: 50%;
 	background: green;
 	position: absolute;
