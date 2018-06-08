@@ -58,6 +58,9 @@ window.onload=function(){
 				velocityY = 0;
 				break;
 			case " ":
+			
+				document.querySelector('.space-button').classList.add('space-button-active');
+			
 				let newSeg = document.createElement('div');
 				let currentNumberOfSegs = document.querySelectorAll('.seg').length;
 				let newSegData = currentNumberOfSegs;
@@ -69,7 +72,20 @@ window.onload=function(){
 				newSeg.setAttribute('data-seg',newSegData);
 				
 				document.querySelector('body').append(newSeg);
+				
+				let plusOne = document.createElement('div');
+				plusOne.classList.add('plusOne');
+				plusOne.innerHTML = "+1 segment";
+				document.querySelector('body').append(plusOne);
+				plusOne.addEventListener('animationend',function(){plusOne.outerHTML="";})
 				break;
 		}
-	})
+	});
+	
+	window.addEventListener('keyup',function(e){
+		switch(e.key){
+			case " ":
+				document.querySelector('.space-button').classList.remove('space-button-active');
+		}
+	});
 }
