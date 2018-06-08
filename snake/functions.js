@@ -45,7 +45,7 @@ window.onload=function(){
 		let segments = document.querySelectorAll('.seg');
 		
 		segments.forEach(function(seg){
-			setTimeout(function(){
+			window.setTimeout(function(){
 				seg.style = "top: " + seg1Y + "%; left: " + seg1X + "%;";
 			},(seg.getAttribute("data-seg"))*frequency);
 		});
@@ -127,7 +127,7 @@ function createNewApple(){
 	let appleX = Math.floor(Math.random() * 100);
 	let appleY = Math.floor(Math.random() * 100);
 	
-	newApple.style = "top: " + appleY.toString() + "%; left: " + appleX + "%;";
+	newApple.style = "top: " + appleY + "%; left: " + appleX + "%;";
 	
 	document.querySelector('body').append(newApple);
 };
@@ -166,10 +166,6 @@ function detectTail(){
 		let tailSegY = parseInt(tailSegment.style.top);
 		
 		if(tailSegX == snakeMouthX && tailSegY == snakeMouthY){
-			for (var i = 1; i < 100; i++){
-				window.clearInterval(i);
-				window.clearTimeout(i);
-			}        
 			fail();
 		}
 	});
@@ -181,20 +177,20 @@ function detectBorder(){
 	let snakeMouthX = parseInt(snakeMouth.style.left);
 	let snakeMouthY = parseInt(snakeMouth.style.top);
 	
-	if(snakeMouthX <= -1 || snakeMouthX >= 100 || snakeMouthY <= -1 || snakeMouthY >= 100){
+	if(snakeMouthX <= 0 || snakeMouthX >= 100 || snakeMouthY <= -1 || snakeMouthY >= 100){
 		fail();
 	}
 };
 
 function fail(){
 	
-	let body = document.querySelector('body');
-	body.style = "opacity: 0.5";
+	let body = document.querySelector('body');	
 	
 	for(i=0; i<10; i++){
+		window.clearTimeout(i);
 		window.clearInterval(i);
+		
 	}
-	
 	
 	let failMessage = document.createElement('div');
 	failMessage.classList.add('fail-message');
