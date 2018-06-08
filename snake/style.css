@@ -48,3 +48,40 @@
 	background: green;
 	position: absolute;
 }
+
+.fail-message {
+	border: 2px solid #f0f0f0;
+	border-radius: 5px;
+	font-size: 5em;
+	text-align: center;
+	height: auto;
+	opacity: 1 !important;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	user-select: none;
+}
+
+.restart-button {
+	border: 1px solid #d0d0d0;
+	border-radius: 3px;
+	font-size: 3em;
+	text-align: center;
+	height: auto;
+	opacity: 1 !important;
+	position: absolute;
+	left: 50%;
+	top: 65%;
+	color: red;
+	transform: translateX(-50%);
+	z-index: 100;
+	box-shadow: 0px 3px #f0f0f0;
+	user-select: none;
+}
+
+.restart-button-active {
+	transform: translate(-50%, 2px);
+	box-shadow: 0px 1px #f0f0f0;
+}
