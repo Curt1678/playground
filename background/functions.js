@@ -1,3 +1,5 @@
+let light = 50;
+
 window.addEventListener('mousemove',function(e){
 	console.log('working');
 	let mouseX = e.clientX;
@@ -10,4 +12,9 @@ window.addEventListener('mousemove',function(e){
 	let saturation = 100 - ((mouseY / windowHeight)*100);
 	
 	document.querySelector('body').style = "background: hsl(" + hue + "," + saturation + "%,50%);";
+	
+	document.querySelector('.hsl').style = "font-size: " + ((windowWidth/1920) * 8).toString() + "em;";
+	
+	document.querySelector('#hID').innerHTML = Math.round(hue).toString();
+	document.querySelector('[id="sID"]').innerHTML = Math.round(saturation).toString();
 });
