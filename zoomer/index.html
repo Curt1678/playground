@@ -1,0 +1,111 @@
+<html>
+<head>
+<style>
+.zoomer {
+	height: 10px;
+	width: 10px;
+	background: #000;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.right {
+	animation: right 2s ease-in-out;
+}
+
+.down {
+	animation: down 2s ease-in-out;
+}
+
+.left {
+	animation: left 2s ease-in-out;
+}
+
+.up {
+	animation: up 2s ease-in-out;
+}
+
+@keyframes right {
+	0% {top: 10%; left: 10%;}
+	100% {top: 10%; left: 90%;}
+}
+
+@keyframes down {
+	0% {top: 10%; left: 90%;}
+	100% {top: 90%; left: 90%;}
+}
+
+@keyframes left {
+	0% {top: 90%; left: 90%;}
+	100% {top: 90%; left: 10%;}
+}
+
+@keyframes up {
+	0% {top: 90%; left: 10%;}
+	100% {top: 10%; left: 10%;}
+}
+</style>
+<script>
+window.onload = function(){
+
+	let numOfZoomers = 10;
+	
+	for(i=0; i<numOfZoomers; i++){
+		let zoomer = document.createElement('div');
+		zoomer.classList.add('zoomer');
+		zoomer.setAttribute('data-anim',0);
+		zoomer.style="animation-delay: " + ((i/numOfZoomers)*1).toString() + "s;";
+	
+		switch(parseInt(zoomer.getAttribute('data-anim'))){
+			case 0:
+				zoomer.classList.add('right');
+				break;
+			case 1:
+				zoomer.classList.add('down');
+				break;
+			case 2:
+				zoomer.classList.add('left');
+				break;
+			case 3:
+				zoomer.classList.add('up');
+				break;
+		}
+		document.querySelector('body').append(zoomer);
+		
+		zoomer.addEventListener('animationend',function(){
+			let animationValue = parseInt(zoomer.getAttribute('data-anim'));
+	
+			switch(animationValue){
+				case 0:
+					zoomer.classList.remove('right');
+					zoomer.classList.add('down');
+					zoomer.setAttribute('data-anim',1);
+					zoomer.style="";
+					break;
+				case 1:
+					zoomer.classList.remove('down');
+					zoomer.classList.add('left');
+					zoomer.setAttribute('data-anim',2);
+					zoomer.style="";
+					break;
+				case 2:
+					zoomer.classList.remove('left');
+					zoomer.classList.add('up');
+					zoomer.setAttribute('data-anim',3);
+					zoomer.style="";
+					break;
+				case 3:
+					zoomer.classList.remove('up');
+					zoomer.classList.add('right');
+					zoomer.setAttribute('data-anim',0);
+					zoomer.style="";
+					break;
+			}
+		});
+	}
+}
+</script>
+</head>
+<body>
+</body>
+</html>
