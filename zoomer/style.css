@@ -38,21 +38,25 @@ body {overflow: hidden}
 
 @keyframes right {
 	0% {top: 10%; left: 10%;}
+	50% {width: 30px; height: 30px;}
 	100% {top: 10%; left: 90%;}
 }
 
 @keyframes down {
 	0% {top: 10%; left: 90%;}
+	50% {width: 30px; height: 30px;}
 	100% {top: 90%; left: 90%;}
 }
 
 @keyframes left {
 	0% {top: 90%; left: 90%;}
+	50% {width: 30px; height: 30px;}
 	100% {top: 90%; left: 10%;}
 }
 
 @keyframes up {
 	0% {top: 90%; left: 10%;}
+	50% {width: 30px; height: 30px;}
 	100% {top: 10%; left: 10%;}
 }
 
