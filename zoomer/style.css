@@ -1,0 +1,62 @@
+body {overflow: hidden}
+.zoomer {
+	height: 10px;
+	width: 10px;
+	background: #000;
+	position: absolute;
+	border-radius: 50%;
+	top: 10%;
+	left: 10%;
+}
+
+.right {
+	animation: right 2s ease-in-out;
+}
+
+.down {
+	animation: down 2s ease-in-out;
+}
+
+.left {
+	animation: left 2s ease-in-out;
+}
+
+.up {
+	animation: up 2s ease-in-out;
+}
+
+.ripple {
+	animation: ripple 2s linear;
+	border-radius: 50%;
+	border: 2px solid #40a4df;
+	position: absolute;
+	background: transparent;
+	transform-origin: 50% 50%;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+}
+
+@keyframes right {
+	0% {top: 10%; left: 10%;}
+	100% {top: 10%; left: 90%;}
+}
+
+@keyframes down {
+	0% {top: 10%; left: 90%;}
+	100% {top: 90%; left: 90%;}
+}
+
+@keyframes left {
+	0% {top: 90%; left: 90%;}
+	100% {top: 90%; left: 10%;}
+}
+
+@keyframes up {
+	0% {top: 90%; left: 10%;}
+	100% {top: 10%; left: 10%;}
+}
+
+@keyframes ripple {
+	0% {width: 1px; height: 1px; opacity: 1;}
+	100% {width: 500px; height: 500px; opacity: 0;}
+}
