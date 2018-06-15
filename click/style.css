@@ -1,0 +1,27 @@
+body {
+	overflow: hidden;
+}
+
+.plusOne {
+	position: absolute;
+	animation: floatAway 1s linear;
+	user-select: none !important;
+}
+
+.swirl {
+	transform-origin: -20px 20px;
+	height: 5px;
+	width: 5px;
+	animation: orbit 0.3s linear infinite;
+	position: absolute;
+	background: #000;
+	border-radius: 50%;
+}
+
+@keyframes floatAway {
+	100% {opacity: 0; transform:translateY(-20px);}
+}
+
+@keyframes orbit {
+	100% {transform: rotate(360deg);}
+}
