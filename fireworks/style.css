@@ -1,0 +1,36 @@
+.firework {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	animation: fade 1s cubic-bezier(.75,.18,.93,.42);
+	/*border: 1px solid black;*/
+	border-radius: 50%;
+}
+
+@keyframes fade {
+	100% {opacity: 0;}
+}
+
+.shrapnel-container {
+	position: absolute;
+	left:50%;
+	top:45%;
+	transform-origin: 0% 50%;
+	height: 10%;
+	width: 50%;
+	/*border: 1px solid red;*/
+}
+
+.shrapnel {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	position: absolute;
+	top: 42%;
+	animation: project 1s cubic-bezier(.55,.98,.56,.83);
+}
+
+@keyframes project {
+	0% {left: 0%}
+	100% {left: 100%}
+}
