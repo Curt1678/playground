@@ -1,7 +1,12 @@
 let light = 50;
 
+window.onload=function(){
+	let windowWidth = window.innerWidth;
+	
+	document.querySelector('.hsl').style = "font-size: " + ((windowWidth/1920) * 8).toString() + "em;";
+}
+
 window.addEventListener('mousemove',function(e){
-	console.log('working');
 	let mouseX = e.clientX;
 	let mouseY = e.clientY;
 	
