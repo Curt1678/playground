@@ -1,3 +1,7 @@
+body {
+	background: #000;
+}
+
 .firework {
 	position: absolute;
 	width: 300px;
@@ -32,4 +36,12 @@
 @keyframes project {
 	0% {left: 0%}
 	100% {left: 100%}
+}
+
+.star {
+	position: absolute;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	z-index: 1;
 }
