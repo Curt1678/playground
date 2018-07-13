@@ -1,0 +1,20 @@
+.wasp {
+	width: 5px;
+	height: 5px;
+	background: black;
+	border-radius: 50%;
+	position: absolute;
+	
+	transform-origin: 50% 50%;
+	animation-name: oscillate;	
+	animation-iteration-count: infinite;
+}
+
+body {
+	overflow: hidden;
+}
+
+.waspRotator {
+	position: absolute;
+	transition-timing-function: linear;
+	}
