@@ -1,0 +1,93 @@
+<html>
+
+<head>
+
+<script>
+function myFunc(){
+	let ele = document.querySelector('.peekaboo');
+	
+	ele.classList.remove('hidden');
+	
+	ele.classList.toggle('hide-anim');
+	ele.classList.toggle('show-anim');
+};
+</script>
+
+<style>
+.peekaboo {
+	width: 50vw;
+	height: 50vh;
+	margin: auto;
+	background: red;
+}
+
+.hidden {
+	display: none;
+}
+
+button {
+	margin: auto;
+	width: 5vw;
+}
+
+.hide-anim {
+	animation: hide-anim 0.75s ease-in-out forwards;
+}
+
+@keyframes hide-anim {
+		0% {
+			overflow: hidden;
+			height: 50vh;
+			opacity: 1;
+		}
+		
+		1% {
+			overflow: hidden;
+			height: 50vh;
+			opacity: 1;
+		}
+		
+		100% {
+			overflow: hidden;
+			height: 0.1vh;
+			opacity: 0;
+		}
+}
+
+.show-anim {
+	animation: show-anim 0.75s ease-in-out forwards;
+}
+
+@keyframes show-anim {
+		0% {
+			overflow: hidden;
+			height: 0.1vh;
+			opacity: 0;
+		}
+		
+		99% {
+			overflow: hidden;
+			height: 50vh;
+			opacity: 1;
+		}
+		
+		100% {
+			overflow: hidden;
+			height: 50vh;
+			opacity: 1;
+		}
+	}
+
+</style>
+
+</head>
+
+<body>
+
+<button onclick="myFunc()">Clicky</button>
+<br /><br />
+<div class="peekaboo hidden hide-anim"></div>
+
+</body>
+
+</html>
