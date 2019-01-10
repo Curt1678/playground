@@ -1,0 +1,183 @@
+<head>
+<style>
+.dot {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	/*border: 1px solid black;*/
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	
+	
+}
+
+.pulse {
+	animation: pulse-anim 0.25s ease-out;
+}
+
+@keyframes pulse-anim {
+	0% {
+		width: 20px;
+		height: 20px;
+	}
+		
+	33% {
+		width: 35px;
+		height: 35px;
+	}
+	
+	100% {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+
+table {
+	border-collapse: collapse;
+}
+
+.row {
+	height: 50px;
+}
+
+.column {
+	width: 50px;
+	/*border: 1px solid black;*/
+}
+
+/*.row-11 .column-30 */.dot {
+	border: 1px solid black;
+}
+</style>
+<script>
+
+let dotWidth = 20;
+let dotHeight = 20;
+
+let cellWidth = 50;
+let cellHeight = 50;
+
+let horiCells = Math.floor(window.innerWidth / cellWidth);
+let vertiCells = Math.floor(window.innerHeight / cellHeight);
+
+function initiate(){
+
+	//
+	// first lets create a table
+		
+	let body = document.querySelector('body');
+	let table = document.createElement('table');
+	
+	body.append(table);
+	
+	//
+	// now lets create the rows
+	
+	for(i=0; i<vertiCells; i++){
+		let tempRow = document.createElement('tr');
+		tempRow.setAttribute('class','row-' + (i+1));
+		tempRow.classList.add('row');
+		table.append(tempRow);
+	}
+	
+	//
+	// now lets populate the rows with cells
+	
+	let rows = document.querySelectorAll('tr');
+	
+	rows.forEach(function(row){
+		for(i=0; i<horiCells; i++){
+			let tempCell = document.createElement('td');
+			tempCell.setAttribute('class','column-' + (i+1));
+			tempCell.classList.add('column');
+			tempCell.setAttribute('data-row',row.getAttribute('class').match(/\d/g).join(""));
+			tempCell.setAttribute('data-column',(i+1));
+			row.append(tempCell);
+		}
+	});
+	
+	//
+	// now lets put a dot in each cell
+	
+	let cells = document.querySelectorAll('td');
+	cells.forEach(function(cell){
+		let dot = document.createElement('div');
+		dot.classList.add('dot');
+		cell.append(dot);
+		dot.setAttribute('data-row',cell.getAttribute('data-row'));
+		dot.setAttribute('data-column',cell.getAttribute('data-column'));
+	});
+	
+	//
+	// now lets put a pulse on each dot when it is clicked
+	
+	let dots = document.querySelectorAll('.dot');
+	dots.forEach(function(dot){
+		
+		dot.pulse = function(){
+		
+			if(this.classList.contains('dead')){
+				this.classList.remove("dead");
+			} else {
+				this.classList.remove('pulse');
+				this.offsetWidth = this.offsetWidth;
+				this.classList.add('pulse');
+	
+				let row = this.getAttribute('data-row');
+				let column = this.getAttribute('data-column');
+			
+				this.classList.add('dead');
+				
+				
+				
+				setTimeout(function(){chain(row,column)},20);
+			}
+	
+	
+		};
+		
+		dot.addEventListener('click',function(){dot.pulse();})
+	});
+	
+	
+	
+}
+
+function chain(startRow,startColumn){
+	let start = [startRow,startColumn];
+	let up = [parseInt(start[0])-1,parseInt(start[1])];
+	let down = [parseInt(start[0])+1,parseInt(start[1])];
+	let left = [parseInt(start[0]),parseInt(start[1])-1];
+	let right = [parseInt(start[0]),parseInt(start[1])+1];
+	
+	document.querySelectorAll('.dot').forEach(function(dot){
+		if(
+		dot.getAttribute('data-row') == up[0] && dot.getAttribute('data-column') == up[1]
+		||
+		dot.getAttribute('data-row') == left[0] && dot.getAttribute('data-column') == left[1]
+		||
+		dot.getAttribute('data-row') == right[0] && dot.getAttribute('data-column') == right[1]
+		||
+		dot.getAttribute('data-row') == down[0] && dot.getAttribute('data-column') == down[1]
+		){
+			if(!dot.classList.contains('dead')){
+				dot.pulse();
+			}
+			else {
+				setTimeout(function(){dot.classList.remove('dead')},500);
+			}
+		}
+	});
+	
+}
+
+
+
+</script>
+</head>
+
+<body onload="initiate()">
+</body>
