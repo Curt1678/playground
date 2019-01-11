@@ -1,0 +1,115 @@
+<head>
+
+<style>
+.entity {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	position: absolute;
+}
+
+#pendulum {
+	background: #000;
+	z-index: -1;
+}
+
+#focus {
+	background: red;
+	z-index: 1;
+}
+</style>
+
+<script>
+
+
+
+function initialise(){
+
+	var forceType = 1;				// smh is 1. gravity is 2.
+	var forceCoeff = 0.00001;		// smh is 0.00001. gravity is 0.00000001.
+
+	let initialX = Math.floor(window.innerWidth/2);
+	let initialY =  Math.floor(window.innerHeight/2);	
+
+	let body = document.querySelector('body');
+	let pendulum = document.querySelector('#pendulum');
+	let focus = document.querySelector('#focus');
+	
+	let delT = 20;	
+	
+	let pVX = pVY = 0;
+	let pAX = pAY = 0;
+	
+	pendulum.setAttribute('data-x',initialX); pendulum.setAttribute('data-y',initialY);
+	focus.setAttribute('data-x',initialX);focus.setAttribute('data-y',initialY);
+	
+	pendulum.style.left = pendulum.getAttribute('data-x') + "px"; pendulum.style.top = pendulum.getAttribute('data-y') + "px";
+	focus.style.left = pendulum.getAttribute('data-x') + "px"; focus.style.top = pendulum.getAttribute('data-y') + "px";
+	
+	function pRefresh(){
+	
+		// update position
+		
+		let startX = parseFloat(pendulum.getAttribute('data-x')); let startY = parseFloat(pendulum.getAttribute('data-y'));
+		pendulum.setAttribute('data-x',startX + (pVX * delT)); pendulum.setAttribute('data-y',startY + (pVY * delT));
+		pendulum.style.left = pendulum.getAttribute('data-x') + "px"; pendulum.style.top = pendulum.getAttribute('data-y') + "px";
+		
+		// update velocity
+		
+		let xresistance = 0.005 * pVX;
+		let yresistance = 0.005 * pVY;
+		
+		pVX += (pAX * delT) - xresistance; pVY += (pAY * delT) - yresistance;
+		
+		// update acceleration
+		
+		let pPOS = [parseFloat(pendulum.getAttribute('data-x')),parseFloat(pendulum.getAttribute('data-y'))];
+		let fPOS = [parseFloat(focus.getAttribute('data-x')),parseFloat(focus.getAttribute('data-y'))];
+		
+		let dist = Math.sqrt(Math.pow(fPOS[1] - pPOS[1],2) + Math.pow(fPOS[0] - pPOS[0],2));
+		let angleRAD = Math.sqrt(Math.pow((Math.atan((fPOS[1] - pPOS[1])/(fPOS[0] - pPOS[0]))),2)); if(!angleRAD){angleRAD=0;}
+		
+		let xMULTIPLIER = 0;
+		let yMULTIPLIER = 0;
+		
+		if(fPOS[0] >= pPOS[0]){xMULTIPLIER = 1;} if(fPOS[1] >= pPOS[1]){yMULTIPLIER = 1;}
+		if(fPOS[0] < pPOS[0]){xMULTIPLIER = -1;} if(fPOS[1] < pPOS[1]){yMULTIPLIER = -1;}
+		
+		pAX = xMULTIPLIER*(forceCoeff)*(Math.pow(dist,forceType)*Math.cos(angleRAD)); // simulate gravity with Math.pow(dist,2). simulate simple harmonic motion with Math.pow(dist,1);
+		pAY = yMULTIPLIER*(forceCoeff)*(Math.pow(dist,forceType)*Math.sin(angleRAD));
+	
+	};
+	
+	setInterval(function(){pRefresh()},delT);
+	
+	
+
+	focus.addEventListener('mousedown',function(){
+		window.addEventListener('mousemove',movement);
+	});
+	
+	window.addEventListener('mouseup',function(){
+		window.removeEventListener('mousemove',movement);
+	});
+
+
+	function movement(e){
+		focus.setAttribute('data-x',parseFloat(focus.getAttribute('data-x')) + parseFloat(e.movementX)); focus.setAttribute('data-y',parseFloat(focus.getAttribute('data-y')) + parseFloat(e.movementY));
+		
+		focus.style.left = focus.getAttribute('data-x') + "px"; focus.style.top = focus.getAttribute('data-y') + "px";		
+	};
+	
+	
+
+};
+</script>
+
+</head>
+
+<body onload="initialise()">
+
+<div id="pendulum" class="entity" ></div>
+<div id="focus" class="entity"></div>
+
+</body>
+
