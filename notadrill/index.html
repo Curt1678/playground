@@ -1,0 +1,96 @@
+<head>
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+<style>
+
+td {
+	text-align: center;
+	background: #fff;
+	color: #000;
+	border-radius: 5px;
+	border: 1px solid #c0c0c0;
+	padding: 15px;
+	margin: 15px;
+	font-weight: 600;
+	box-shadow: 0 3px #999;
+}
+
+td:active {
+	box-shadow: 0 1px #999;
+	transform: translateY(2px);
+}
+
+tr {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+table {
+	width: 100%;
+}
+
+.on {
+	color: #fff;
+	background: #c0c0c0;
+}
+
+.container {
+	width: auto;
+	text-align: center;
+	margin: auto;
+	margin-top: 18%;
+}
+
+.hidden {
+	display: none;
+}
+
+.text {
+	font-size: 5em;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+</style>
+
+<script>
+
+function initialise(){
+	document.querySelectorAll('td').forEach(function(elem){
+		elem.addEventListener('mousedown',function(){
+			let num = parseInt(this.innerHTML);
+			let pointer = 'text-' + num;
+			let textDiv = document.getElementsByClassName(pointer);
+			document.querySelectorAll('.container div').forEach(function(val){val.classList.add('hidden')});
+			textDiv[0].classList.remove('hidden');
+			document.querySelectorAll('td').forEach(function(elem){elem.classList.remove('on')});
+			this.classList.add('on');
+		});
+	});
+};
+
+</script>
+</head>
+<body onload="initialise()">
+
+<table>
+
+<tr>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+</tr>
+
+</table>
+
+<div class="container">
+	<div class="hidden text text-1">This</div>
+	<div class="hidden text text-2">Is</div>
+	<div class="hidden text text-3">Not</div>
+	<div class="hidden text text-4">A</div>
+	<div class="hidden text text-5">Drill</div>
+</div>
+
+</body>
